@@ -1,17 +1,17 @@
-#encode2m4v
+# encode2m4v
 
-####NAME
+#### NAME
       encode2m4v  - Transcodes video files using HandBrakeCLI
 
-####VERSION
+#### VERSION
       Version 0.9.6
 
-####SUMMARY
+#### SUMMARY
   Encodes .mp4 files to .m4v files recursing directories to find all .mp4 files
   with the ability to include subtitles into the encoded file and/or upconvert
   the output to 1080. Other options are possible using command line arguments.
 
-####SYNOPSIS
+#### SYNOPSIS
       encode2m4v "root directory/" [switch(es) [option(s)]]
 
       Manditory:
@@ -40,17 +40,17 @@
            -q/--quiet
 
 
-####HELP
+#### HELP
       encode2m4v -h  or  --help
 
 
-####REQUIREMENTS
+#### REQUIREMENTS
   handbrakeCLI.exe  - installed in same directory, /Applications/HandBrakeCLI (Mac OS)
                       or in PATH, or as flatpak (Linux)
 
-####DETAILS
+#### DETAILS
 ------------
-#####DESCRIPTION  
+##### DESCRIPTION  
             Transcodes files and recurses folders in current directory "." (or
              "root directory".) Finds all .mp4 (or "--inext") files and transcodes
              them into an .m4v (or "--ext") file using the "HQ 1080p30 Surround"
@@ -59,11 +59,11 @@
              also has command line switches (arguments) which can be passed in to set
              the "root" folder and other switches to set processing options.
 
-#####PROMPTS  
+##### PROMPTS  
              1) Prompts for the subtitle extension (??.srt) or "none" (0) to add
              2) Prompts whether or not to upconvert to resolution 1920 x 1080
 
-#####DEFAULTS  
+##### DEFAULTS  
              Default HandBrakeCLI preset: HQ 1080p30 Surround
 
              Default  HandBrakeCLI Transcoding options:
@@ -71,7 +71,7 @@
              Default HandBrakeCLI transcoding options for adding subtitles:
                    --subtitle-lang-list eng,spa --native-language eng
 
-#####OPTIONS
+##### OPTIONS
         Switches
             -h, --help
                 See a synopsis.
@@ -131,29 +131,30 @@
             -q, --quiet
                 Work in quiet mode. Display no outputs or prompts unless necessary.
 
-#####WARNINGS  
+##### WARNINGS  
              If the output file exists (or is the same name as the input file
              and in the same directory) THE FILE WILL BE OVERWRITTEN (defaultj /
              THIS IS PARTICULARY DANGEROUS IF OUTPUTTING TO A FILE EXTENSION
              WHICH IS THE SAME AS THE INPUT EXTENSION. This is only possible
              if using command line options - SO BE CAREFUL!
 
-#####SEE ALSO
+##### SEE ALSO
              encode2m4v Documentation: https://docs.encode2m4v.sh
 
              encode2m4v Wiki: https://github.com/encode2m4v/encode2m4v/wiki
 
-#####BUGS  ... (yes...)
+##### BUGS  
+            ... (yes...)
 
-#####AUTHOR
+##### AUTHOR
              Written by M T ... <mailto://encode2m4v  at  gmail.com>
 
-#####REPORTING BUGS
+##### REPORTING BUGS
              See our issues on GitHub:
 
                   https://github.com/encode2m4v/encode2m4v/issues
 
-#####COPYRIGHT
+##### COPYRIGHT
              Copyright  © 2023 M T  License GPLv3+: GNU GPL version 3 or later.
 
              This program is free software: you can redistribute it and/or modify
