@@ -64,7 +64,7 @@ DETAILS
 DESCRIPTION  Transcodes files and recurses folders in current directory "." (or
              "root directory".) Finds all .mp4 (or "--inext") files and transcodes
              them into an .m4v (or "--ext") file using the "HQ 1080p30 Surround"
-             (or --preset) HandBrakeCLI preset. Originally ment to be copied to the
+             (or --preset) HandBrakeCLI preset. Originally meant to be copied to the
              directory to start the recursive search (root) and run from there, it
              also has command line switches (arguments) which can be passed in to set
              the "root" folder and other switches to set processing options.
@@ -180,30 +180,9 @@ encode2m4v                                     User Contributed Documentation   
 '
 # WORKING ON:
 #
-#  - DO chown --silent --reference="$RFILE.mp4" "$NEWFILE.M4V"
-#
-#  DONE - rename the prog and inside to - encode2m4v  ???
-#
 #  FIX "-?" SWITCH
 #
-#    TEST - BAD SUBTITLE EXTENSION CHECK - MUST END IN .srt
-#
-#    TEST - PRESET PASS IN LOGIC & VALIDITY CHECK
-#
-#    TEST -   Add switch for LOG FILE output
-#
-#    TEST -   Continue/Break logic and .srt file name checking
-#
-#  DONE - Change version to 0p9p6
-#
-#  WORKING - Clean up comments and ADD detailed comments
-#
-#  HUH - ALSO GET CORRECT EXTENSION OF ANY .SRT FILES AND USE THOSE (DON'T JUST GUESS WHAT THEY ARE)
-#         (search all files and if .srt then guess what language etc...)
-#
 # OTHER OPTIONS TO INCLUDE LATER:
-#
-#  WORKING ON - SWITCH - to set own transcoding options( -t, --transopt=""  / HandBrakeCLI_transcoding_options )
 #
 #   - SWITCH - to set subtitles to set as defaults ( - , -- /  HandBrakeCLI_transcoding_options_for_adding_subtitles )
 #
@@ -215,34 +194,17 @@ encode2m4v                                     User Contributed Documentation   
 #
 #   - WAY TO ADD MULTIPLE FILE EXTENSIONS TO FIND AS INPUT EXTENSION (or all known?)
 #
-#   TEST - OPTION TO SET INPUT FILE EXTENSION (-i) TO SEARCH (E.G. .mkv) - TRY ".*" TO SEE...
-#
-#   TEST - OPTION TO SET OUTPUT FILE EXTENSION (-e) TO NAME OUTPUT FILE (E.G. .m4v)
-#     if .mp4 then set --format <av_mp4> - NOT NECESSARY THIS IS AUTO DETECTED
-#     if .mkv then set --format <av_mkv> - NOT NECESSARY THIS IS AUTO DETECTED
-#
-#  TEST - OPTION TO SET OUTPUT DIRECTORY  maybe -r to make same directory structure
-#           To recreate directory structure - compare input file directory
-#              to root folder - if different than root folder then put
-#              output file into differenc(d) directory with output directory as root
-#
 #  SET LANGUAGES FOR SUBTITLE ADDITION - AS VARIABLES (DEFAULTS)
 #   MAYBE A SWITCH OPTION (-d, --dialect ) TO SET
 #    can it add multiple subtitles? (or all with same filename and detect language)
-#
-#  TEST - -j / -json OPTION TO PASS IN (OR SELECT) A Handbrake .json CONFIG FILE
 #
 #  BE ABLE TO READ A encode2m4v CONFIG FILE AND USE THOSE SETTINGS
 #
 #  OPTION TO CHANGE THE DEFAULTS OF encodeM4V (e.g prest or output file path)
 #
-#  - remove stray and extra comments
-#
 #  - rename all variables to use descriptive lower_case notation
 #
 # TO TEST:
-#
-#    Quiet mode - all cases
 #
 #    Test as cron job ...
 #
@@ -2026,7 +1988,9 @@ if [[ "$make_log_file" == "TRUE" ]] ; then
 fi
 # IF USING A .json FILE - ADD IT IN FRONT OF TRANSCODING OPTIONS AND SET PRESET TO ""
 if [[ "$HandBrake_json_to_use_set" == "set" ]]; then
-  HandBrakeCLI_transcoding_options="--preset-import-file \"$HandBrake_json_to_use\" $HandBrakeCLI_transcoding_options"
+  HandBrake_json_preset_file_name="${HandBrake_json_to_use##*/}"
+  HandBrake_json_preset_name="${HandBrake_json_preset_file_name%\.*}"
+  HandBrakeCLI_transcoding_options="--preset-import-file \"$HandBrake_json_to_use\" -Z \"$HandBrake_json_preset_name\" $HandBrakeCLI_transcoding_options"
   preset_to_use=""
 fi
 # GET TOTAL NUMBER OF FILES TO PROCESS
