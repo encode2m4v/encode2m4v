@@ -54,7 +54,7 @@
             Transcodes files and recurses folders in current directory "." (or
              "root directory".) Finds all .mp4 (or "--inext") files and transcodes
              them into an .m4v (or "--ext") file using the "HQ 1080p30 Surround"
-             (or --preset) HandBrakeCLI preset. Originally ment to be copied to the
+             (or --preset) HandBrakeCLI preset. Originally meant to be copied to the
              directory to start the recursive search (root) and run from there, it
              also has command line switches (arguments) which can be passed in to set
              the "root" folder and other switches to set processing options.
@@ -141,7 +141,8 @@
 ##### SEE ALSO
              encode2m4v Documentation: https://docs.encode2m4v.sh
 
-             encode2m4v Wiki: https://github.com/encode2m4v/encode2m4v/wiki
+             encode2m4v Wiki: 
+                 <https://github.com/encode2m4v/encode2m4v/wiki>
 
 ##### BUGS  
             ... (yes...)
@@ -152,7 +153,7 @@
 ##### REPORTING BUGS
              See our issues on GitHub:
 
-                  https://github.com/encode2m4v/encode2m4v/issues
+                  <https://github.com/encode2m4v/encode2m4v/issues>
 
 ##### COPYRIGHT
              Copyright  © 2023 M T  License GPLv3+: GNU GPL version 3 or later.
