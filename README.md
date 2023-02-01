@@ -11,6 +11,47 @@
   with the ability to include subtitles into the encoded file and/or upconvert
   the output to 1080. Other options are possible using command line arguments.
 
+#### FEATURES
+  
+  If run witout switches: 
+ 
+  - searches in current directory and subdirectories for all video files with a .mp4 extension
+ - will prompt for a subtitle extension to add or no subtitle.
+ - will prompt whether or not to upconvert to 1080.
+ - will start transcoding all found video files to .m4v files using the HandBrakeCLI "HQ 1080p30 Surround" preset.
+ - will place these transcoded files in the same directory as the source (input) video file.
+ - will not move or remove any files.
+ - will not display the HandBrakeCLI encoding details.
+
+Command line switches - provide ability to:
+
+  - specifiy a "transcode directory/" to start search for video files and subtitle files.
+
+  - specify input video file extension to search for (.mp4, .mov, .mkv, ...) - (-i / --inext)
+
+  - specify output transcoded video file extension (.mp4 , .m4v, .mkv ...) - (-e / --ext)
+
+  - specify subtitle file extension (?.srt / "none") - (-s / --subtitle=)
+  
+  - specify whether to stop encoding (-b / --break) if a subtitle file is not found or continue (-c / --continue)
+
+  - specify a HandBrake preset (-p / --preset=)
+
+  - specify specific HanBrake transcoding options (-t / --transopt)
+
+  - use a HandBrake .json settings file (-j / --json=)
+
+  - upconvert the video to 1080 (-u / --upconvert) or not (-n / --noupconvert)
+
+  - output the transcoded file(s) to a specified directory (-o / --output=)
+
+  - re-create the input directory structure when output to a different directory (-r / --recreatedirs)
+
+  - move input video and subtitle files once they have been transcoded (-m / --move=)
+
+  - show details of HandBrakeCLI encoding or not (-d / --details)
+
+  - display a "manpage" like information (-g / --guide)
 #### SYNOPSIS
       encode2m4v "root directory/" [switch(es) [option(s)]]
 
@@ -51,7 +92,7 @@
 #### DETAILS
 ------------
 ##### DESCRIPTION  
-            Transcodes files and recurses folders in current directory "." (or
+             Transcodes files and recurses folders in current directory "." (or
              "root directory".) Finds all .mp4 (or "--inext") files and transcodes
              them into an .m4v (or "--ext") file using the "HQ 1080p30 Surround"
              (or --preset) HandBrakeCLI preset. Originally meant to be copied to the
@@ -139,21 +180,21 @@
              if using command line options - SO BE CAREFUL!
 
 ##### SEE ALSO
-             encode2m4v Documentation: https://docs.encode2m4v.sh
+###### encode2m4v Documentation: 
+###### [https://docs.encode2m4v.sh](https://docs.encode2m4v.sh)
 
-             encode2m4v Wiki: 
-                 <https://github.com/encode2m4v/encode2m4v/wiki>
+###### encode2m4v Wiki: 
+###### [https://github.com/encode2m4v/encode2m4v/wiki](https://github.com/encode2m4v/encode2m4v/wiki)
 
-##### BUGS  
+##### BUGS INCLUDED
             ... (yes...)
 
 ##### AUTHOR
-             Written by M T ... <mailto://encode2m4v  at  gmail.com>
+             Written by M T ... (encode2m4v  at  gmail.com)
 
 ##### REPORTING BUGS
-             See our issues on GitHub:
-
-                  <https://github.com/encode2m4v/encode2m4v/issues>
+###### See our issues on GitHub:
+###### [https://github.com/encode2m4v/encode2m4v/issues](https://github.com/encode2m4v/encode2m4v/issues)
 
 ##### COPYRIGHT
              Copyright  © 2023 M T  License GPLv3+: GNU GPL version 3 or later.
