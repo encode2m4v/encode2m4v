@@ -13,9 +13,9 @@
 
 #### FEATURES
   
-  If run witout switches: 
+  If run without switches: 
  
-  - searches in current directory and subdirectories for all video files with a .mp4 extension
+  - searches in current directory and subdirectories for all video files with a .mp4 extension.
  - will prompt for a subtitle extension to add or no subtitle.
  - will prompt whether or not to upconvert to 1080.
  - will start transcoding all found video files to .m4v files using the HandBrakeCLI "HQ 1080p30 Surround" preset.
@@ -37,7 +37,7 @@ Command line switches - provide ability to:
 
   - specify a HandBrake preset (-p / --preset=)
 
-  - specify specific HanBrake transcoding options (-t / --transopt)
+  - specify specific HandBrake transcoding options (-t / --transopt)
 
   - use a HandBrake .json settings file (-j / --json=)
 
@@ -93,7 +93,7 @@ Command line switches - provide ability to:
 ------------
 ##### DESCRIPTION  
              Transcodes files and recurses folders in current directory "." (or
-             "root directory".) Finds all .mp4 (or "--inext") files and transcodes
+             "root directory/".) Finds all .mp4 (or "--inext") files and transcodes
              them into an .m4v (or "--ext") file using the "HQ 1080p30 Surround"
              (or --preset) HandBrakeCLI preset. Originally meant to be copied to the
              directory to start the recursive search (root) and run from there, it
