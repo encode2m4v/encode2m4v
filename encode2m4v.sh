@@ -2007,10 +2007,12 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
       # Increment current file number
       ((++current_file_number))
       long_f=$(echo "$file_name" | tr -s '/')
+      long_f="${long_f//$/\\$}"  # escape any $ s to \$
       short_f="${file_name##*/}"
       out_f="${short_f%\.*}$output_file_extension"
       if [ "$output_directory" == "./" ] ; then
         out_f_l=$(echo "${file_name%\.*}$output_file_extension" | tr -s '/')
+        out_f_l="${out_f_l//$/\\$}"  # escape any $ s to \$
       elif [ "$make_directory_structure" == "TRUE" ] ; then
         justpathnofile=${file_name%/*}
         #
@@ -2024,10 +2026,12 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
         out_f="${out_f//\\,/,}"  # remove any \, s
         out_f="${out_f//\\\\/\\}"  # remove any \\ s
         out_f_l=$(echo "$directory_to_create/$out_f" | tr -s '/')
+        out_f_l="${out_f_l//$/\\$}"  # escape any $ s to \$
       else # Output to another out directory but do NOT create directory structure
         out_f="${out_f//\\,/,}"  # remove any \, s
         out_f="${out_f//\\\\/\\}"  # remove any \\ s
         out_f_l=$(echo "$output_directory$out_f" | tr -s '/')
+        out_f_l="${out_f_l//$/\\$}"  # escape any $ s to \$
       fi
       if [[ "$add_subs" == "TRUE" ]]; then
         srt_f="${short_f%\.*}"$subtitle_extension
@@ -2038,25 +2042,28 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
         else
           subtitle_file_found="FALSE"
         fi
+        srt_f_l="${srt_f_l//$/\\$}"  # escape any $ s to \$
       fi
       # TRANSCODING FILE INFO INTO LOGFILE
       if [[ "$make_log_file" == "TRUE" ]] ; then
         # LOG FILE BEING TRANSCODED - JSON FORMAT
         echo "    {" >> "$output_log_file"
-        long_f=$(echo "$file_name" | tr -s '/')
         log_long_f="${long_f//\\,/,}"
         log_long_f="${log_long_f//\\\\/\\}"
         log_long_f="${log_long_f//\\\\/\\}"
+        log_long_f="${log_long_f//\\$/$}"  # NEW FOR ESCAPED $ s (\$)
         log_long_f="${log_long_f//\\/\\\\}" # I DONT KNOW WHY THIS IS NOT NEEDED... the & puts what was found back in...
         echo "      \"long_f\" : \"${log_long_f}\"," >> "$output_log_file"
         log_out_f_l="${out_f_l//\\,/,}"
         log_out_f_l="${log_out_f_l//\\\\/\\}"
         log_out_f_l="${log_out_f_l//\\\\/\\}"
+        log_out_f_l="${log_out_f_l//\\$/$}"  # NEW FOR ESCAPED $ s (\$)
         log_out_f_l="${log_out_f_l//\\/\\\\}"
         echo "      \"out_f_l\" : \"${log_out_f_l}\"," >> "$output_log_file"
         log_srt_f_l="${srt_f_l//\\,/,}"
         log_srt_f_l="${log_srt_f_l//\\\\/\\}"
         log_srt_f_l="${log_srt_f_l//\\\\/\\}"
+        log_srt_f_l="${log_srt_f_l//\\$/$}"  # NEW FOR ESCAPED $ s (\$)
         log_srt_f_l="${log_srt_f_l//\\/\\\\}"
         echo "      \"srt_f_l\" : \"${log_srt_f_l}\"," >> "$output_log_file"
         echo "      \"subtitle_file_found\" : \"$subtitle_file_found\"," >> "$output_log_file"
@@ -2105,6 +2112,10 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
         the_from_directory=$(echo "${file_name%/*}" | tr -s '/')
         the_from_directory=$(echo "${the_from_directory//\\,/,}" | tr -s '/')
         the_from_directory=$(echo "${the_from_directory//\\\\,/\\}" | tr -s '/')
+        the_from_directory=$(echo "${the_from_directory//\/\//\/}" | tr -s '/')  # new for two / s
+        if [[ "$the_from_directory" == "./" ]]; then
+          the_from_directory="."
+        fi
         echo -e "Encoding file number $current_file_number of $number_of_files_to_encode total files to encode:"
         echo ""
         echo "From directory: $the_from_directory/"
@@ -2128,6 +2139,10 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
           the_out_directory=$(echo "${the_out_directory//\\,/,}" | tr -s '/')
           the_out_directory=$(echo "${the_out_directory//\\\\/\\}" | tr -s '/')
           the_out_directory=$(echo "${the_out_directory//\\\\/\\}" | tr -s '/')
+          the_out_directory=$(echo "${the_out_directory//\/\//\/}" | tr -s '/') # new for two / s
+          if [[ "$the_out_directory" == "./" ]]; then
+            the_out_directory="."
+          fi
           echo "To Output directory: $the_out_directory/"
         else
           the_out_directory=$(echo "${out_f_l%/*}" | tr -s '/')
@@ -2162,6 +2177,7 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
             log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
             log_the_encode_command="${the_encode_command//\\/\\\\}" # ESCAPE ANY BACKSLASHES
             log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
+            log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE $ WITH SINGLE
             log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
             echo "      \"encode2m4v_encode_command\" : \"${log_the_encode_command}\"" >> "$output_log_file"
             printf "    }" >> "$output_log_file"
@@ -2184,6 +2200,7 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
             log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
             log_the_encode_command="${the_encode_command//\\/\\\\}" # ESCAPE ANY BACKSLASHES
             log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
+            log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE \$ WITH SINGLE $
             log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
             echo "      \"encode2m4v_encode_command\" : \"${log_the_encode_command}\"" >> "$output_log_file"
             printf "    }" >> "$output_log_file"
@@ -2201,6 +2218,7 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
             # Save ENCODE COMMAND to log file - JSON FORMAT
             the_encode_command="$HandBreakCLIProg $log_the_preset--input '${log_long_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option}  </dev/null"
             log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
+            log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE \$ WITH SINGLE $
             log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
             echo "      \"encode2m4v_encode_command\" : \"${log_the_encode_command}\"" >> "$output_log_file"
             printf "    }" >> "$output_log_file"
@@ -2219,6 +2237,7 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
             # Save ENCODE COMMAND to log file - JSON FORMAT
             the_encode_command="$HandBreakCLIProg $log_the_preset--input '${log_long_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} </dev/null"
             log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
+            log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE \$ WITH SINGLE $
             log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
             echo "      \"encode2m4v_encode_command\" : \"${log_the_encode_command}\"" >> "$output_log_file"
             printf "    }" >> "$output_log_file"
@@ -2249,6 +2268,7 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
             log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
             log_the_encode_command="${the_encode_command//\\/\\\\}" # ESCAPE ANY BACKSLASHES
             log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
+            log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE \$ WITH SINGLE $
             log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
             echo "      \"encode2m4v_encode_command\" : \"${log_the_encode_command}\"" >> "$output_log_file"
             printf "    }" >> "$output_log_file"
@@ -2266,6 +2286,7 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
             log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
             log_the_encode_command="${the_encode_command//\\/\\\\}" # ESCAPE ANY BACKSLASHES
             log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
+            log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE \$ WITH SINGLE $
             log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
             echo "      \"encode2m4v_encode_command\" : \"${log_the_encode_command}\"" >> "$output_log_file"
             printf "    }" >> "$output_log_file"
@@ -2279,6 +2300,7 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
             # Save ENCODE COMMAND to log file - JSON FORMAT
             the_encode_command="$HandBreakCLIProg  --verbose=1 $log_the_preset--input '${log_long_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} </dev/null > /dev/null 2>&1"
             log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
+            log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE \$ WITH SINGLE $
             log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
             echo "      \"encode2m4v_encode_command\" : \"${log_the_encode_command}\"" >> "$output_log_file"
             printf "    }" >> "$output_log_file"
@@ -2292,6 +2314,7 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
             # Save ENCODE COMMAND to log file - JSON FORMAT
             the_encode_command="$HandBreakCLIProg  --verbose=1 $log_the_preset--input '${log_long_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} </dev/null > /dev/null 2>&1"
             log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
+            log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE \$ WITH SINGLE $
             log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
             echo "      \"encode2m4v_encode_command\" : \"${log_the_encode_command}\"" >> "$output_log_file"
             printf "    }" >> "$output_log_file"
@@ -2324,42 +2347,51 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
           new_path_from_root="${justpathnofile#"$transcode_directory"}"
           full_move_directory=$(echo "$move_directory$new_path_from_root" | tr -s '/')
           full_move_directory="${full_move_directory//\\,/,}"  # remove any \, s
+          full_move_directory="${full_move_directory//\\$/$}"  # remove any \$ s
           full_move_directory="${full_move_directory//\\\\/\\}"  # remove any \\ s
           mkdir -p "$full_move_directory" > /dev/null 2>&1
           short_f="${short_f//\\,/,}"  # remove any \, s
+          short_f="${short_f//\\$/$}"  # remove any \$ s
           short_f="${short_f//\\\\/\\}"  # remove any \\ s
           move_to_filename="$full_move_directory/$short_f"
           if [[ "$quiet" != "TRUE" ]] ; then
             echo -e "\nMOVING PROCESSED VIDEO FILE: $log_long_f"
           fi
+          long_f="${long_f//\\$/$}"  # remove any \$ s
           mv "$long_f" "$move_to_filename"
           if [ "$add_subs" == "TRUE" ] && [ "$subtitle_file_found" == "TRUE" ] ; then
             move_srt_short_f="${srt_f_l##*/}"
             move_srt_short_f="${move_srt_short_f//\\,/,}"  # remove any \, s
+            move_srt_short_f="${move_srt_short_f//\\$/$}"  # remove any \$ s
             move_srt_short_f="${move_srt_short_f//\\\\/\\}"  # remove any \\ s
             move_srt_to_filename="$full_move_directory/$move_srt_short_f"
             if [[ "$quiet" != "TRUE" ]] ; then
               echo -e "\nMOVING INCLUDED SUBTITLE FILE: $log_srt_f_l"
             fi
+            srt_f_l="${srt_f_l//\\$/$}"  # remove any \$ s
             mv "$srt_f_l" "$move_srt_to_filename"
           fi
         else # MOVE to another move directory but do NOT create directory structure
           mkdir -p "$move_directory" > /dev/null 2>&1
           short_f="${short_f//\\,/,}"  # remove any \, s
+          short_f="${short_f//\\$/$}"  # remove any \$ s
           short_f="${short_f//\\\\/\\}"  # remove any \\ s
           move_to_filename="$move_directory$short_f"
           if [[ "$quiet" != "TRUE" ]] ; then
             echo -e "\nMOVING PROCESSED VIDEO FILE: $log_long_f"
           fi
+          long_f="${long_f//\\$/$}"  # remove any \$ s
           mv "$long_f" "$move_to_filename"
           if [ "$add_subs" == "TRUE" ] && [ "$subtitle_file_found" == "TRUE" ] ; then
             move_srt_short_f="${srt_f_l##*/}"
             move_srt_short_f="${move_srt_short_f//\\,/,}"  # remove any \, s
+            move_srt_short_f="${move_srt_short_f//\\$/$}"  # remove any \$ sv
             move_srt_short_f="${move_srt_short_f//\\\\/\\}"  # remove any \\ s
             move_srt_to_filename="$move_directory$move_srt_short_f"
             if [[ "$quiet" != "TRUE" ]] ; then
               echo -e "\nMOVING INCLUDED SUBTITLE FILE: $log_srt_f_l"
             fi
+            srt_f_l="${srt_f_l//\\$/$}"  # remove any \$ s
             mv "$srt_f_l" "$move_srt_to_filename"
           fi
         fi
