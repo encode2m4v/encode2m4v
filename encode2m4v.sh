@@ -15,7 +15,7 @@ NAME
       encode2m4v  - Transcodes video files using HandBrakeCLI
 
 VERSION
-      Version 0.9.6
+      Version 0.9.7
 
 SUMMARY
   Encodes .mp4 files to .m4v files recursing directories to find all .mp4 files
@@ -40,12 +40,14 @@ SYNOPSIS
            -t/--transopt=
            -u/--upconvert
            -n/--noupconvert
+           -x/--xlevel
            -c/--continue
            -b/--break
            -o/--output=
            -r/--recreatedirs
            -m/--move=
            -a/--all
+           -k/--kill
            -l/--logfile=
            -d/--details
            -q/--quiet
@@ -106,13 +108,16 @@ DESCRIPTION  Transcodes files and recurses folders in current directory "." (or
                 Subtitle extension to include into Output file. Must end in .srt (SubRipper type) (Enclose in quotes ".ext")
 
             -t, --transopt=
-                Transcoding options to use when calling HandBrakeCLI (Enclose in quotes "----")
+                Transcoding options to use when calling HandBrakeCLI (Enclose in quotes "<options>")
 
             -u, --upconvert
-                Upconvert all encoded files.
+                Upconvert all encoded files. Not necessary if using -x / --xlevel.
 
             -n, --noupconvert
-                Do NOT upconvert all encoded vided files.
+                Do NOT upconvert all encoded vided files. Must be specified or prompts will occur.
+
+            -x, --xlevel=
+                Set upconvert level (720, 1080, 2160, 4320).
 
             -c, --continue
                 Continue encoding if a file is missing the designated subtitle file for the video file.
@@ -129,9 +134,12 @@ DESCRIPTION  Transcodes files and recurses folders in current directory "." (or
             -m, --move=
                 Directory to move all source files into (out of root directory) once they have been re-encoded.
 
+            -k, --kill
+                Delete (kill) all source files once they have been re-encoded. Takes prescedence over -m / --move.
+
             -l, --logfile=
-                Logfile filename to use to log information to a .json format log file. (Enclose in quotes "logfile.json")
-                Saved in root of output directory.
+            Logfile filename to use to log information to a .json format log file. (Enclose in quotes "logfile.json")
+            Saved in root of output directory.
 
             -d, --details
                 Details of the HandBrakeCLI transcoding will be shown.
@@ -188,11 +196,11 @@ encode2m4v                                     User Contributed Documentation   
 #
 #   - SWITCH - to set default subtitle language ( -, --native= / HandBrakeCLI_subtitle_native_language )
 #
-#   - SWITCH TO PASS IN THE UPCONVERT RESOLUTION ( - , --  ="1080" / 720 / 1080 / 2160   / HandBrakeCLI_upconvert_option )
+#  TESTING - SWITCH TO PASS IN THE UPCONVERT RESOLUTION ( -x , --xlevel  ="1080" / 720 / 1080 / 2160 / 4320  / HandBrakeCLI_upconvert_option )
 #
 #     SWITCH - to set added subtitle language ( -d, --dialect=  / HandBrakeCLI_srt_language )
 #
-#   - WAY TO ADD MULTIPLE FILE EXTENSIONS TO FIND AS INPUT EXTENSION (or all known?)
+#   TESTING (.*)- WAY TO ADD MULTIPLE FILE EXTENSIONS TO FIND AS INPUT EXTENSION (or all known?)
 #
 #  SET LANGUAGES FOR SUBTITLE ADDITION - AS VARIABLES (DEFAULTS)
 #   MAYBE A SWITCH OPTION (-d, --dialect ) TO SET
@@ -215,10 +223,10 @@ encode2m4v                                     User Contributed Documentation   
 #
 
 # SET the app details
-filename_version="0p9p6"
+filename_version="0p9p7"
 the_version_major="0"
 the_version_minor="9"
-the_version_micro="6"
+the_version_micro="7"
 version="$the_version_major.$the_version_minor.$the_version_micro"
 the_app_name="encode2m4v"
 the_version="$the_app_name Version $version"
@@ -266,20 +274,22 @@ the_help5=" -g, --guide        |  [none]  | Display the instruction guide for us
 # the_help6=" -f, --file=        |  CONFIG  | Use the CONFIG file as encode2m4v settings"
 the_help7=" -p, --preset=      | \"PRESET\" | HandBrake Preset (e.g. \"HQ 1080p30 Surround\" - the default)"
 the_help8=" -j, --json=        |  \"FILE\"  | HandBrake .json preset file (e.g. \"My HandBrake Preset.json\")"
-the_help9=" -i, --inext=       |  \".ext\"  | Input file Extension (e.g. \".mp4\" - the default)"
+the_help9=" -i, --inext=       |  \".ext\"  | Input file Extension (e.g. \".mp4\" - the default) \".*\" for all video files"
 the_help10=" -e, --ext=         |  \".ext\"  | Output file Extension (e.g. \".m4v\" - the default or \".mkv\")"
 the_help11=" -s, --subtitle=    |  \".ext\"  | Subtitle Extension (e.g. \".srt\" - the default) or \"NONE\" or 0"
-the_help12=" -t, --transopt=    |  \"OPTS\"  | Transcoding Options (e.g. \"--quality 22.0 --cfr -r 30 --loose-anamorphic\""
-the_help13=" -u, --upconvert    |  [none]  | Up-convert all video to 1080"
-the_help14=" -n, --noupconvert  |  [none]  | Do Not Up-convert all video to 1080"
-the_help15=" -c, --continue     |  [none]  | Continue encoding if subtitle file is missing"
-the_help16=" -b, --break        |  [none]  | Stop (break) encoding if subtitle file is missing (DEFAULT)"
-the_help17=" -o, --output=      |   \"DIR\"  | Directory to output all encoded files - DEFAULT IS SAME AS INPUT"
-the_help18=" -r, --recreatedirs |  [none]  | When using an output directory - recreate input directory structure"
-the_help19=" -m, --move=        |   \"DIR\"  | Directory to move original files once they have been encoded"
-the_help20=" -l, --logfile=     |  \"FILE\"  | Logfile for output of all processing - PLACED IN OUTPUT DIRECTORY"
-the_help21=" -d, --details      |  [none]  | Details mode (show HandBrakeCLI processing)"
-the_help22=" -q, --quiet        |  [none]  | Quiet mode (no confirmation prompts or details)"
+the_help12=" -t, --transopt=    |  \"OPTS\"  | Transcoding Options (e.g. \"--quality 24.0 --cfr -r 30 --loose-anamorphic\""
+the_help13=" -u, --upconvert    |  [none]  | Up-convert all video - not needed if using -x / --xlevel"
+the_help14=" -n, --noupconvert  |  [none]  | Do Not Up-convert all video. Must be specified or prompts will occur"
+the_help15=" -x, --xlevel=      | \"Level\"  | Set upconvert level (720, 1080, 2160, 4320) If not set then default is 1080."
+the_help16=" -c, --continue     |  [none]  | Continue encoding if subtitle file is missing"
+the_help17=" -b, --break        |  [none]  | Stop (break) encoding if subtitle file is missing (DEFAULT)"
+the_help18=" -o, --output=      |   \"DIR\"  | Directory to output all encoded files - DEFAULT IS SAME AS INPUT"
+the_help19=" -r, --recreatedirs |  [none]  | When using an output directory - recreate input directory structure"
+the_help20=" -m, --move=        |   \"DIR\"  | Directory to move original files once they have been encoded"
+the_help21=" -k, --kill         |  [none]  | Kill (delete) files once they have been encoded - takes precedence over -m / --move"
+the_help22=" -l, --logfile=     |  \"FILE\"  | Logfile for output of all processing - PLACED IN OUTPUT DIRECTORY"
+the_help23=" -d, --details      |  [none]  | Details mode (show HandBrakeCLI processing)"
+the_help24=" -q, --quiet        |  [none]  | Quiet mode (no confirmation prompts or details)"
 
 # DEFAULT PRESET TO USE IF NOT SPECIFIED
 preset_to_use="HQ 1080p30 Surround"
@@ -758,8 +768,8 @@ declare -a valid_input_file_extensions_array=(".m4v"
                                           ".3gp"
                                           ".3g2"
                                           ".mj2"
-                                          ".*")
-
+                                          ".*") # ALL INPUT EXTENSIONS
+all_input_file_extensions_for_search=".m4v\" -o -iname \"*.mp4\" -o -iname \"*.mkv\" -o -iname \"*.avi\" -o -iname \"*.mov\" -o -iname \"*.m4a\" -o -iname \"*.3gp\" -o -iname \"*.3g2\" -o -iname \"*.m2j"
 declare -a valid_output_file_extensions_array=(".m4v"
 																          ".mp4"
                                           ".mkv")
@@ -779,6 +789,7 @@ move_directory_set="not set"
 # SET DEFAULT INPUT FILE EXTENSION - DEFAULT IS .mp4
 input_file_extension=".mp4"
 input_file_extension_set="not set"
+log_input_file_extension="$input_file_extension"
 
 # SET DEFAULT OUTPUT FILE EXTENSION - DEFAULT IS .m4v
 output_file_extension=".m4v"
@@ -812,6 +823,10 @@ continue="FALSE" # the default if not set
 make_directory_structure_set="not set"
 make_directory_structure="FALSE" # the default if not set
 
+# Kill (delete) files after processing - set or NOT
+kill_set="not set"
+kill="FALSE" # the default if not set
+
 # LOG FILE - Set or NOT
 log_file="none"
 log_file_set="not set"
@@ -829,7 +844,10 @@ clean_up() {
   # Perform program exit housekeeping
   tput sgr0
   rm -f "$TEMP_FILE"
-  [[ $1 == 0 ]] && echo -e "\nThank you for using encode2m4v!"
+  # IF QUIET NOT REQUESTED - DISPLAY WELCOME
+  if [[ $quiet != "TRUE" ]] ; then
+    [[ $1 == 0 ]] && echo -e "\nThank you for using encode2m4v!"
+  fi
   exit $1
 }
 
@@ -881,6 +899,8 @@ for ((arg_index=0;arg_index<$cmd_line_args_array_length;arg_index++)); do
 		   [[ "${cmd_line_args_array[arg_index]^^}" != "--UPCONVERT" ]] &&
 		   [[ "${cmd_line_args_array[arg_index]^^}" != "-N" ]] &&
 		   [[ "${cmd_line_args_array[arg_index]^^}" != "--NOUPCONVERT" ]] &&
+       [[ "${cmd_line_args_array[arg_index]^^}" != "-X" ]] &&
+		   [[ "${cmd_line_args_array[arg_index]^^}" != "--XLEVEL"* ]] &&
 			 [[ "${cmd_line_args_array[arg_index]^^}" != "-C" ]] &&
 		   [[ "${cmd_line_args_array[arg_index]^^}" != "--CONTINUE" ]] &&
 		   [[ "${cmd_line_args_array[arg_index]^^}" != "-B" ]] &&
@@ -891,6 +911,8 @@ for ((arg_index=0;arg_index<$cmd_line_args_array_length;arg_index++)); do
        [[ "${cmd_line_args_array[arg_index]^^}" != "--RECREATEDIRS" ]] &&
        [[ "${cmd_line_args_array[arg_index]^^}" != "-M" ]] &&
        [[ "${cmd_line_args_array[arg_index]^^}" != "--MOVE"* ]] &&
+       [[ "${cmd_line_args_array[arg_index]^^}" != "-K" ]] &&
+       [[ "${cmd_line_args_array[arg_index]^^}" != "--KILL" ]] &&
        [[ "${cmd_line_args_array[arg_index]^^}" != "-L" ]] &&
 		   [[ "${cmd_line_args_array[arg_index]^^}" != "--LOGFILE"* ]] &&
        [[ "${cmd_line_args_array[arg_index]^^}" != "-D" ]] &&
@@ -946,6 +968,8 @@ for ((arg_index=0;arg_index<$cmd_line_args_array_length;arg_index++)); do
           [ "${cmd_line_args_array[arg_index]^^}" == "--UPCONVERT" ] ||
           [ "${cmd_line_args_array[arg_index]^^}" == "-N" ] ||
           [ "${cmd_line_args_array[arg_index]^^}" == "--NOUPCONVERT" ] ||
+          [ "${cmd_line_args_array[arg_index]^^}" == "-X" ] ||
+          [ "${cmd_line_args_array[arg_index]^^}" == "--XLEVEL"* ] ||
           [ "${cmd_line_args_array[arg_index]^^}" == "-C" ] ||
           [ "${cmd_line_args_array[arg_index]^^}" == "--CONTINUE" ] ||
           [ "${cmd_line_args_array[arg_index]^^}" == "-B" ] ||
@@ -956,6 +980,8 @@ for ((arg_index=0;arg_index<$cmd_line_args_array_length;arg_index++)); do
           [ "${cmd_line_args_array[arg_index]^^}" == "--RECREATEDIRS" ] ||
           [ "${cmd_line_args_array[arg_index]^^}" == "-M" ] ||
           [ "${cmd_line_args_array[arg_index]^^}" == "--MOVE"* ] ||
+          [ "${cmd_line_args_array[arg_index]^^}" == "-K" ] ||
+          [ "${cmd_line_args_array[arg_index]^^}" == "--KILL" ] ||
           [ "${cmd_line_args_array[arg_index]^^}" == "-L" ] ||
           [ "${cmd_line_args_array[arg_index]^^}" == "--LOGFILE"* ] ||
           [ "${cmd_line_args_array[arg_index]^^}" == "-D" ] ||
@@ -1015,9 +1041,11 @@ for ((arg_index=0;arg_index<$cmd_line_args_array_length;arg_index++)); do
         echo "$the_help20"
         echo "$the_help21"
         echo "$the_help22"
+        echo "$the_help23"
+        echo "$the_help24"
         tput sgr0
 				exit 0
-			;;
+			  ;;
 			"-G" | "--GUIDE") # DISPLAY THE GUIDE USING more AND EXIT
         tput setaf 1
         tput setab 7
@@ -1189,7 +1217,7 @@ for ((arg_index=0;arg_index<$cmd_line_args_array_length;arg_index++)); do
           skip_next_arg="false"
         fi
         ;;
-        "-I" | "--INEXT="* )
+      "-I" | "--INEXT="* )
         if [[ "${arg^^}" == "-I" ]]; then
           # must have another arg...
           # if -i option is last arg THEN  MISSING INPUT FILE EXTENSION OPTION
@@ -1214,6 +1242,12 @@ for ((arg_index=0;arg_index<$cmd_line_args_array_length;arg_index++)); do
             # SET - THEN - VALIDATE AGAINST THE VALID input EXTENSIONS
             input_file_extension="${cmd_line_args_array[(arg_index+1)]}"
             if [[ "${valid_input_file_extensions_array[*]^^}" =~ "${input_file_extension^^}" ]] ; then
+              if [[ "${input_file_extension}" == ".*" ]]; then
+                input_file_extension="$all_input_file_extensions_for_search"
+                log_input_file_extension=".*"
+              else
+                log_input_file_extension="$input_file_extension"
+              fi
               input_file_extension_set="set"
             else # NOT A VALID EXTENSION
               error_description="BAD \"Input Extension\""
@@ -1241,6 +1275,12 @@ for ((arg_index=0;arg_index<$cmd_line_args_array_length;arg_index++)); do
           # CHECK IF VALID OR Not
           #
           if [[ "${valid_input_file_extensions_array[*]^^}" =~ "${input_file_extension^^}" ]] ; then
+            if [[ "${input_file_extension}" == ".*" ]]; then
+              input_file_extension="$all_input_file_extensions_for_search"
+              log_input_file_extension=".*"
+            else
+              log_input_file_extension="$input_file_extension"
+            fi
             input_file_extension_set="set"
           else  # NOT A VALID EXTENSION
             error_description="BAD \"Input Extension\""
@@ -1436,47 +1476,144 @@ for ((arg_index=0;arg_index<$cmd_line_args_array_length;arg_index++)); do
 					fi
 					skip_next_arg="false"
 				fi
-			;;
-    "-T" | "--TRANSOPT="* )
-			if [[ "${arg^^}" == "-T" ]]; then
-				# must have another arg...
-				# if -t option is last arg THEN  MISSING TRANSCODE OPTIONS argument
-				if (( $arg_index == ($cmd_line_args_array_length - 1) )) ; then
-          error_description="MISSING \"transcode options\""
-          tput setaf 1
-          tput setab 7
-          echo ""
-					echo -e "$error_description Check usage:\n"
-					echo "USAGE: (examples)"
-					echo "$cmd_line_cmd <root directory> -t \"<options>\""
-					echo "OR"
-					echo "$cmd_line_cmd <root directory> --transopt=\"<options>\""
-					echo ""
-					echo "For full usage use the -h or --help switch."
-					echo ""
-          tput sgr0
-          error_exit "${error_description}"
-          # exit 1
-				else
-					HandBrakeCLI_transcoding_options="${cmd_line_args_array[(arg_index+1)]}"
-          HandBrakeCLI_transcoding_options_set="set"
-					skip_next_arg="true"
-				fi
-			elif [[ "${arg^^}" == "--TRANSOPT="* ]]; then
+  			;;
+      "-T" | "--TRANSOPT="* )
+  			if [[ "${arg^^}" == "-T" ]]; then
+  				# must have another arg...
+  				# if -t option is last arg THEN  MISSING TRANSCODE OPTIONS argument
+  				if (( $arg_index == ($cmd_line_args_array_length - 1) )) ; then
+            error_description="MISSING \"transcode options\""
+            tput setaf 1
+            tput setab 7
+            echo ""
+  					echo -e "$error_description Check usage:\n"
+  					echo "USAGE: (examples)"
+  					echo "$cmd_line_cmd <root directory> -t \"<options>\""
+  					echo "OR"
+  					echo "$cmd_line_cmd <root directory> --transopt=\"<options>\""
+  					echo ""
+  					echo "For full usage use the -h or --help switch."
+  					echo ""
+            tput sgr0
+            error_exit "${error_description}"
+            # exit 1
+  				else
+  					HandBrakeCLI_transcoding_options="${cmd_line_args_array[(arg_index+1)]}"
+            HandBrakeCLI_transcoding_options_set="set"
+  					skip_next_arg="true"
+  				fi
+  			elif [[ "${arg^^}" == "--TRANSOPT="* ]]; then
 
-				# VALIDATE RIGHT SIDE FOR VALID HandBrakeCLI transcoding options (ha!)
-				HandBrakeCLI_transcoding_options=$(echo "$arg" | grep -o '[^=]*$')
-        HandBrakeCLI_transcoding_options_set="set"
-				# NEED TO CHECK IF VALID OR Not
-				#
-				skip_next_arg="false"
-			fi
-			;;
-			"-U" | "--UPCONVERT")
-      	# echo "Upconverting to 1080!"
-				up_convert="TRUE"
-				up_convert_set="set"
-			;;
+  				# VALIDATE RIGHT SIDE FOR VALID HandBrakeCLI transcoding options (ha!)
+  				HandBrakeCLI_transcoding_options=$(echo "$arg" | grep -o '[^=]*$')
+          HandBrakeCLI_transcoding_options_set="set"
+  				# NEED TO CHECK IF VALID OR Not
+  				#
+  				skip_next_arg="false"
+  			fi
+  			;;
+  		"-U" | "--UPCONVERT" | "-X" | "--XLEVEL="* )
+        if [[ "${arg^^}" == "-X" ]]; then
+          # must have another arg...
+          # if -x option is last arg THEN  MISSING Upconvert Level argument
+          if (( $arg_index == ($cmd_line_args_array_length - 1) )) ; then
+            error_description="MISSING \"upconvert level\""
+            tput setaf 1
+            tput setab 7
+            echo ""
+            echo -e "$error_description Check usage:\n"
+            echo "USAGE: (examples)"
+            echo "$cmd_line_cmd <root directory> -x \"1080\""
+            echo "OR"
+            echo "$cmd_line_cmd <root directory> --xlevel=\"2160\""
+            echo ""
+            echo "For full usage use the -h or --help switch."
+            echo ""
+            tput sgr0
+            error_exit "${error_description}"
+            # exit 1
+          else
+            # SET - THEN - VALIDATE AGAINST THE VALID Upconvert Levels
+            up_convert_level="${cmd_line_args_array[(arg_index+1)]}"
+            if [[ "${up_convert_level_array[*]}" =~ "${up_convert_level}" ]] ; then
+              case $up_convert_level in
+                "720" )
+                  HandBrakeCLI_upconvert_option="$HandBrakeCLI_upconvert_720_option"
+                ;;
+                "1080" )
+                  HandBrakeCLI_upconvert_option="$HandBrakeCLI_upconvert_1080_option"
+                ;;
+                "2160" )
+                  HandBrakeCLI_upconvert_option="$HandBrakeCLI_upconvert_2160_option"
+                ;;
+                "4320" )
+                  HandBrakeCLI_upconvert_option="$HandBrakeCLI_upconvert_4320option"
+                ;;
+              esac
+              HandBrakeCLI_upconvert_option_set="set"
+              up_convert_level_set=="set"
+            else # NOT A VALID UPCONVERT LEVEL
+              error_description="BAD \"upconvert level\""
+              tput setaf 1
+              tput setab 7
+              echo ""
+              echo -e "$error_description Check usage:\n"
+              echo "USAGE: (examples)"
+              echo "$cmd_line_cmd <root directory> -x \"1080\""
+              echo "OR"
+              echo "$cmd_line_cmd <root directory> --xlevel=\"2160\""
+              echo ""
+              echo "For full usage use the -h or --help switch."
+              echo ""
+              tput sgr0
+              error_exit "${error_description}"
+              # exit 1
+            fi
+            skip_next_arg="true"
+          fi
+        elif [[ "${arg^^}" == "--XLEVEL="* ]]; then
+
+  				# VALIDATE RIGHT SIDE FOR VALID HandBrakeCLI transcoding options (ha!)
+  				up_convert_level=$(echo "$arg" | grep -o '[^=]*$')
+          if [[ "${up_convert_level_array[*]}" =~ "${up_convert_level}" ]] ; then
+            case $up_convert_level in
+              "720" )
+                HandBrakeCLI_upconvert_option="$HandBrakeCLI_upconvert_720_option"
+              ;;
+              "1080" )
+                HandBrakeCLI_upconvert_option="$HandBrakeCLI_upconvert_1080_option"
+              ;;
+              "2160" )
+                HandBrakeCLI_upconvert_option="$HandBrakeCLI_upconvert_2160_option"
+              ;;
+              "4320" )
+                HandBrakeCLI_upconvert_option="$HandBrakeCLI_upconvert_4320option"
+              ;;
+            esac
+            HandBrakeCLI_upconvert_option_set="set"
+            up_convert_level_set=="set"
+          else # NOT A VALID UPCONVERT LEVEL
+            error_description="BAD \"upconvert level\""
+            tput setaf 1
+            tput setab 7
+            echo ""
+            echo -e "$error_description Check usage:\n"
+            echo "USAGE: (examples)"
+            echo "$cmd_line_cmd <root directory> -x \"1080\""
+            echo "OR"
+            echo "$cmd_line_cmd <root directory> --xlevel=\"2160\""
+            echo ""
+            echo "For full usage use the -h or --help switch."
+            echo ""
+            tput sgr0
+            error_exit "${error_description}"
+            # exit 1
+          fi
+  				skip_next_arg="false"
+  			fi
+  			up_convert="TRUE"
+  			up_convert_set="set"
+  			;;
 			"-N" | "--NOUPCONVERT")
       	# echo "NOT Upconverting to 1080..."
 				up_convert="FALSE"
@@ -1599,7 +1736,12 @@ for ((arg_index=0;arg_index<$cmd_line_args_array_length;arg_index++)); do
           skip_next_arg="false"
         fi
         ;;
-      "-L" | "--LOGFILE="* )
+      "-K" | "--KILL")
+      	# echo "DELETING all files after processing..."
+				kill="TRUE"
+				kill_set="set"
+				;;
+			"-L" | "--LOGFILE="* )
         if [[ "${arg^^}" == "-L" ]]; then
           # must have another arg... - CHECK MUST BE VALID filename
           # if -l option is last arg THEN  MISSING FILENAME OPTION
@@ -1828,12 +1970,14 @@ if [[ "$make_log_file" == "TRUE" ]] ; then
   echo -e "      \"output_directory\" : \"$output_directory\"," >> "$output_log_file"
   echo -e "      \"make_directory_structure\" : \"$make_directory_structure\"," >> "$output_log_file"
   echo -e "      \"move_directory\" : \"$move_directory\"," >> "$output_log_file"
-  echo -e "      \"input_file_extension\" : \"$input_file_extension\"," >> "$output_log_file"
+  echo -e "      \"kill\" : \"$kill\"," >> "$output_log_file"
+  echo -e "      \"input_file_extension\" : \"$log_input_file_extension\"," >> "$output_log_file"
   echo -e "      \"output_file_extension\" : \"$output_file_extension\"," >> "$output_log_file"
   echo -e "      \"add_subs\" : \"$add_subs\"," >> "$output_log_file"
   echo -e "      \"subtitle_extension\" : \"$subtitle_extension\"," >> "$output_log_file"
   echo -e "      \"HandBrakeCLI_transcoding_options\" : \"$HandBrakeCLI_transcoding_options\"," >> "$output_log_file"
   echo -e "      \"up_convert\" : \"$up_convert\"," >> "$output_log_file"
+  echo -e "      \"up_convert_level\" : \"$up_convert_level\"," >> "$output_log_file"
   echo -e "      \"preset_to_use\" : \"$preset_to_use\"," >> "$output_log_file"
   echo -e "      \"HandBrake_json_to_use\" : \"$HandBrake_json_to_use\"," >> "$output_log_file"
   echo -e "      \"continue\" : \"$continue\"," >> "$output_log_file"
@@ -1845,7 +1989,7 @@ fi
 
 # ERROR - IF in ext = out ext && transcode dir == output directory
 if [ "$input_file_extension" = "$output_file_extension" ] && ([ "$transcode_directory" = "$output_directory" ] ||  "$output_directory" = "$move_directory" ] || [ "$output_directory" = "./" ]) ; then
-  error_description="ERRER: Extensions same"
+  error_description="ERROR: Extensions same"
   tput setaf 1
   tput setab 7
   echo ""
@@ -1881,11 +2025,14 @@ if [[ $quiet != "TRUE" ]] ; then
   else
     echo -e "OUTPUT DIRECTORY: <same as source>\n"
   fi
-  if [[ "$move_directory_set" == "set" ]]; then
+
+  if [[ "$kill" == "TRUE" ]]; then
+    echo -e "SELECTED: KILL (DELETE) INPUT FILES AFTER PROCESSING\n"
+  elif [[ "$move_directory_set" == "set" ]]; then
     echo -e "MOVE (PROCESSED FILES) DIRECTORY: \"$move_directory\"\n"
   fi
 
-  echo -e "INPUT FILE EXTENSION: \"$input_file_extension\"\n"
+  echo -e "INPUT FILE EXTENSION: \"$log_input_file_extension\"\n"
 
   echo -e "OUTPUT FILE EXTENSION: \"$output_file_extension\"\n"
 
@@ -1893,6 +2040,8 @@ if [[ $quiet != "TRUE" ]] ; then
 		echo -e "SELECTED: SUBTITLE FILE EXTENSION: \"$subtitle_extension\"\n"
     if [[ "$continue" == "TRUE" ]]; then
       echo -e "SELECTED: CONTINUE IF SUBTITLE FILE IS MISSING\n"
+    else
+      echo -e "SELECTED: STOP PROCESSING IF SUBTITLE FILE IS MISSING\n"
     fi
 	else
 		echo -e "SELECTED: NO SUBTITLES\n"
@@ -1902,7 +2051,7 @@ if [[ $quiet != "TRUE" ]] ; then
 		echo -e "SELECTED: HandBrakeCLI Transcoding options: \"$HandBrakeCLI_transcoding_options\"\n"
 	fi
 
-	echo -e "Up-convert to 1080: $up_convert\n"
+	echo -e "Up-convert to $up_convert_level: $up_convert\n"
 
   if [[ ! "$HandBrake_json_to_use_set" == "set" ]]; then
     echo -e "TRANSCODER PRESET: \"$preset_to_use\"\n"
@@ -1946,7 +2095,8 @@ if [ "$add_subs" == "TRUE" ] ; then
     tput sgr0
 	fi
     # SHOULD - ONLY FIND FILES WITH COMMAS...
-    find "$transcode_directory"/* -type f \( -name '*.srt' -o -name "*$input_file_extension" \) -print0 |
+           #  -name '*,*' -a
+    bash -c "find '$transcode_directory'/* -type f \( -iname '*.srt' -o -iname \"*${input_file_extension}\" \) -print0" |
       while IFS= read -r -d '' file_name; do
         # save starting directory
   			orig_dir=$(pwd)
@@ -1994,20 +2144,20 @@ if [[ "$HandBrake_json_to_use_set" == "set" ]]; then
   preset_to_use=""
 fi
 # GET TOTAL NUMBER OF FILES TO PROCESS
-files_count=$(bash -c "find '$transcode_directory'/* -type f -name '*$input_file_extension'" | wc -l | tr -s ' ')
+files_count=$(bash -c "find '$transcode_directory'/* -type f \( -iname \"*${input_file_extension}\" \)" | wc -l | tr -s ' ')
 number_of_files_to_encode=($files_count)
 #
 ### TRANSCODING...
 current_file_number=0
-find "$transcode_directory"/* -type f -name "*$input_file_extension" |
+bash -c "find '$transcode_directory'/* -type f \( -iname \"*${input_file_extension}\" \)" |
 	sort -V -k1 |
 	cut -d$'\t' -f2 |
 	tr '\n' '\0' |
     while IFS= read -r -d '' file_name; do
       # Increment current file number
       ((++current_file_number))
-      long_f=$(echo "$file_name" | tr -s '/')
-      long_f="${long_f//$/\\$}"  # escape any $ s to \$
+      input_f=$(echo "$file_name" | tr -s '/')
+      input_f="${input_f//$/\\$}"  # escape any $ s to \$
       short_f="${file_name##*/}"
       out_f="${short_f%\.*}$output_file_extension"
       if [ "$output_directory" == "./" ] ; then
@@ -2048,12 +2198,12 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
       if [[ "$make_log_file" == "TRUE" ]] ; then
         # LOG FILE BEING TRANSCODED - JSON FORMAT
         echo "    {" >> "$output_log_file"
-        log_long_f="${long_f//\\,/,}"
-        log_long_f="${log_long_f//\\\\/\\}"
-        log_long_f="${log_long_f//\\\\/\\}"
-        log_long_f="${log_long_f//\\$/$}"  # NEW FOR ESCAPED $ s (\$)
-        log_long_f="${log_long_f//\\/\\\\}" # I DONT KNOW WHY THIS IS NOT NEEDED... the & puts what was found back in...
-        echo "      \"long_f\" : \"${log_long_f}\"," >> "$output_log_file"
+        log_input_f="${input_f//\\,/,}"
+        log_input_f="${log_input_f//\\\\/\\}"
+        log_input_f="${log_input_f//\\\\/\\}"
+        log_input_f="${log_input_f//\\$/$}"  # NEW FOR ESCAPED $ s (\$)
+        log_input_f="${log_input_f//\\/\\\\}" # I DONT KNOW WHY THIS IS NOT NEEDED... the & puts what was found back in...
+        echo "      \"input_f\" : \"${log_input_f}\"," >> "$output_log_file"
         log_out_f_l="${out_f_l//\\,/,}"
         log_out_f_l="${log_out_f_l//\\\\/\\}"
         log_out_f_l="${log_out_f_l//\\\\/\\}"
@@ -2171,7 +2321,7 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
           # IF SAVING LOG FILE
           if [[ "$make_log_file" == "TRUE" ]] ; then
             # Save ENCODE COMMAND to log file - JSON FORMAT
-            the_encode_command="$HandBreakCLIProg $log_the_preset--input '${log_long_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file '${log_srt_f_l}' ${HandBrakeCLI_srt_language} </dev/null"
+            the_encode_command="$HandBreakCLIProg $log_the_preset--input '${log_input_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file '${log_srt_f_l}' ${HandBrakeCLI_srt_language} </dev/null"
             log_the_encode_command="${the_encode_command//\\\\\\\\/\\\\}" # 4 \s to 2 \s BACKSLASHES
             log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
             log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
@@ -2184,17 +2334,17 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
           fi
           if [[ "$details" == "TRUE" ]]; then
             # TRANSCODE
-            bash -c "$HandBreakCLIProg $the_preset--input \"${long_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file \"${srt_f_l}\" ${HandBrakeCLI_srt_language} </dev/null"
+            bash -c "$HandBreakCLIProg $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file \"${srt_f_l}\" ${HandBrakeCLI_srt_language} </dev/null"
           else # NO DETAILS (DEFAULT)
-            echo -e "\nENCODING VIDEO FILE: $log_long_f"
-            bash -c "$HandBreakCLIProg $the_preset--input \"${long_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file \"${srt_f_l}\" ${HandBrakeCLI_srt_language} </dev/null > /dev/null 2>&1"
+            echo -e "\nENCODING VIDEO FILE: $log_input_f"
+            bash -c "$HandBreakCLIProg $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file \"${srt_f_l}\" ${HandBrakeCLI_srt_language} </dev/null > /dev/null 2>&1"
           fi
 
   			elif [ "$add_subs" == "TRUE" ] && [ "$up_convert" == "FALSE" ] ; then  # NO - UP-CONVERT
           # IF SAVING LOG FILE
           if [[ "$make_log_file" == "TRUE" ]] ; then
             # Save ENCODE COMMAND to log file - JSON FORMAT
-            the_encode_command="$HandBreakCLIProg $log_the_preset--input '${log_long_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file '${log_srt_f_l}' ${HandBrakeCLI_srt_language} </dev/null"
+            the_encode_command="$HandBreakCLIProg $log_the_preset--input '${log_input_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file '${log_srt_f_l}' ${HandBrakeCLI_srt_language} </dev/null"
             log_the_encode_command="${the_encode_command//\\\\\\\\/\\\\}" # 4 \s to 2 \s BACKSLASHES
             log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
             log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
@@ -2207,16 +2357,16 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
           fi
           if [[ "$details" == "TRUE" ]]; then
             # TRANSCODE
-            bash -c "$HandBreakCLIProg $the_preset--input \"$long_f\" --output \"$out_f_l\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file \"$srt_f_l\" ${HandBrakeCLI_srt_language} </dev/null"
+            bash -c "$HandBreakCLIProg $the_preset--input \"$input_f\" --output \"$out_f_l\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file \"$srt_f_l\" ${HandBrakeCLI_srt_language} </dev/null"
           else # NO DETAILS
-            echo -e "\nENCODING VIDEO FILE: $log_long_f"
-            bash -c "$HandBreakCLIProg $the_preset--input \"$long_f\" --output \"$out_f_l\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file \"$srt_f_l\" ${HandBrakeCLI_srt_language} </dev/null > /dev/null 2>&1"
+            echo -e "\nENCODING VIDEO FILE: $log_input_f"
+            bash -c "$HandBreakCLIProg $the_preset--input \"$input_f\" --output \"$out_f_l\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file \"$srt_f_l\" ${HandBrakeCLI_srt_language} </dev/null > /dev/null 2>&1"
           fi
   			elif [ "$add_subs" == "FALSE" ] && [ "$up_convert" == "TRUE" ] ; then  # NO - SUBS BUT YES UP-CONVERT
           # IF SAVING LOG FILE
           if [[ "$make_log_file" == "TRUE" ]] ; then
             # Save ENCODE COMMAND to log file - JSON FORMAT
-            the_encode_command="$HandBreakCLIProg $log_the_preset--input '${log_long_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option}  </dev/null"
+            the_encode_command="$HandBreakCLIProg $log_the_preset--input '${log_input_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option}  </dev/null"
             log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
             log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE \$ WITH SINGLE $
             log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
@@ -2225,17 +2375,17 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
           fi
           if [[ "$details" == "TRUE" ]]; then
             # TRANSCODE
-            bash -c "$HandBreakCLIProg $the_preset--input \"${long_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option}  </dev/null"
+            bash -c "$HandBreakCLIProg $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option}  </dev/null"
           else # NO DETAILS
-            echo -e "\nENCODING VIDEO FILE: $log_long_f"
-            bash -c "$HandBreakCLIProg $the_preset--input \"${long_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option}  </dev/null > /dev/null 2>&1"
+            echo -e "\nENCODING VIDEO FILE: $log_input_f"
+            bash -c "$HandBreakCLIProg $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option}  </dev/null > /dev/null 2>&1"
           fi
 
   			else  # NO SUBS & NO UP-CONVERT
           # IF SAVING LOG FILE
           if [[ "$make_log_file" == "TRUE" ]] ; then
             # Save ENCODE COMMAND to log file - JSON FORMAT
-            the_encode_command="$HandBreakCLIProg $log_the_preset--input '${log_long_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} </dev/null"
+            the_encode_command="$HandBreakCLIProg $log_the_preset--input '${log_input_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} </dev/null"
             log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
             log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE \$ WITH SINGLE $
             log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
@@ -2244,10 +2394,10 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
           fi
           if [[ "$details" == "TRUE" ]]; then
             # TRANSCODE
-            bash -c "$HandBreakCLIProg $the_preset--input \"${long_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} </dev/null"
+            bash -c "$HandBreakCLIProg $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} </dev/null"
           else  # NO DETAILS
-            echo -e "\nENCODING VIDEO FILE: $log_long_f"
-            bash -c "$HandBreakCLIProg $the_preset--input \"${long_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} </dev/null > /dev/null 2>&1"
+            echo -e "\nENCODING VIDEO FILE: $log_input_f"
+            bash -c "$HandBreakCLIProg $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} </dev/null > /dev/null 2>&1"
           fi
 
   			fi
@@ -2262,7 +2412,7 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
           # IF SAVING LOG FILE
           if [[ "$make_log_file" == "TRUE" ]] ; then
             # Save ENCODE COMMAND to log file - JSON FORMAT
-            the_encode_command="$HandBreakCLIProg  --verbose=1 $log_the_preset--input '${log_long_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file '${log_srt_f_l}' ${HandBrakeCLI_srt_language} </dev/null > /dev/null 2>&1"
+            the_encode_command="$HandBreakCLIProg  --verbose=1 $log_the_preset--input '${log_input_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file '${log_srt_f_l}' ${HandBrakeCLI_srt_language} </dev/null > /dev/null 2>&1"
             log_the_encode_command="${the_encode_command//\\\\\\\\/\\\\}" # 4 \s to 2 \s BACKSLASHES
             log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
             log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
@@ -2274,13 +2424,13 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
             printf "    }" >> "$output_log_file"
           fi
           # TRANSCODE
-          bash -c "$HandBreakCLIProg  --verbose=1 $the_preset--input \"${long_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file \"${srt_f_l}\" ${HandBrakeCLI_srt_language} </dev/null > /dev/null 2>&1"
+          bash -c "$HandBreakCLIProg  --verbose=1 $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file \"${srt_f_l}\" ${HandBrakeCLI_srt_language} </dev/null > /dev/null 2>&1"
 
   			elif [ "$add_subs" == "TRUE" ] && [ "$up_convert" == "FALSE" ] ; then  # NO - UP-CONVERT
           # IF SAVING LOG FILE
           if [[ "$make_log_file" == "TRUE" ]] ; then
             # Save ENCODE COMMAND to log file - JSON FORMAT
-            the_encode_command="$HandBreakCLIProg  --verbose=1 $log_the_preset--input '${log_long_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file '${log_srt_f_l}' ${HandBrakeCLI_srt_language} </dev/null > /dev/null 2>&1"
+            the_encode_command="$HandBreakCLIProg  --verbose=1 $log_the_preset--input '${log_input_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file '${log_srt_f_l}' ${HandBrakeCLI_srt_language} </dev/null > /dev/null 2>&1"
             log_the_encode_command="${the_encode_command//\\\\\\\\/\\\\}" # 4 \s to 2 \s BACKSLASHES
             log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
             log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
@@ -2292,13 +2442,13 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
             printf "    }" >> "$output_log_file"
           fi
           # TRANSCODE
-          bash -c "$HandBreakCLIProg  --verbose=1 $the_preset--input \"${long_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file \"${srt_f_l}\" ${HandBrakeCLI_srt_language} </dev/null > /dev/null 2>&1"
+          bash -c "$HandBreakCLIProg  --verbose=1 $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file \"${srt_f_l}\" ${HandBrakeCLI_srt_language} </dev/null > /dev/null 2>&1"
 
   			elif [ "$add_subs" == "FALSE" ] && [ "$up_convert" == "TRUE" ] ; then  # NO - SUBS BUT YES UP-CONVERT
           # IF SAVING LOG FILE
           if [[ "$make_log_file" == "TRUE" ]] ; then
             # Save ENCODE COMMAND to log file - JSON FORMAT
-            the_encode_command="$HandBreakCLIProg  --verbose=1 $log_the_preset--input '${log_long_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} </dev/null > /dev/null 2>&1"
+            the_encode_command="$HandBreakCLIProg  --verbose=1 $log_the_preset--input '${log_input_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} </dev/null > /dev/null 2>&1"
             log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
             log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE \$ WITH SINGLE $
             log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
@@ -2306,13 +2456,13 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
             printf "    }" >> "$output_log_file"
           fi
           # TRANSCODE
-          bash -c "$HandBreakCLIProg  --verbose=1 $the_preset--input \"${long_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} </dev/null > /dev/null 2>&1"
+          bash -c "$HandBreakCLIProg  --verbose=1 $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} </dev/null > /dev/null 2>&1"
 
   			else  # NO SUBS & NO UP-CONVERT
           # IF SAVING LOG FILE
           if [[ "$make_log_file" == "TRUE" ]] ; then
             # Save ENCODE COMMAND to log file - JSON FORMAT
-            the_encode_command="$HandBreakCLIProg  --verbose=1 $log_the_preset--input '${log_long_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} </dev/null > /dev/null 2>&1"
+            the_encode_command="$HandBreakCLIProg  --verbose=1 $log_the_preset--input '${log_input_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} </dev/null > /dev/null 2>&1"
             log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
             log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE \$ WITH SINGLE $
             log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
@@ -2320,7 +2470,7 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
             printf "    }" >> "$output_log_file"
           fi
           #TRANSCODE
-          bash -c "$HandBreakCLIProg  --verbose=1 $the_preset--input \"${long_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} </dev/null > /dev/null 2>&1"
+          bash -c "$HandBreakCLIProg  --verbose=1 $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} </dev/null > /dev/null 2>&1"
 
   			fi
   		fi
@@ -2340,10 +2490,22 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
         add_subs="TRUE"
         add_subs_skip="FALSE"
       fi
-      # MOVE INPUT FILES IF move_DIRECTORY IS SET
-      if [[ "$move_directory_set" == "set" ]]; then
+      if [[ "$kill" == "TRUE" ]]; then # DELETE INPUT FILES IF kill IS TRUE
+        input_f="${input_f//\\$/$}"  # remove any \$ s
+        if [[ "$quiet" != "TRUE" ]] ; then
+          echo -e "\nDELETING PROCESSED VIDEO FILE: $input_f"
+        fi
+        rm "${input_f}" > /dev/null 2>&1
+        if [ "$add_subs" == "TRUE" ] && [ "$subtitle_file_found" == "TRUE" ]; then
+          srt_f_l="${srt_f_l//\\$/$}"  # remove any \$ s
+          if [[ "$quiet" != "TRUE" ]] ; then
+            echo -e "\nDELETING INCLUDED SUBTITLE FILE: $srt_f_l"
+          fi
+          rm "${srt_f_l}" > /dev/null 2>&1
+        fi
+      elif [[ "$move_directory_set" == "set" ]]; then # MOVE INPUT FILES IF move_DIRECTORY IS SET
         if [ "$make_directory_structure" == "TRUE" ] ; then
-          justpathnofile=${long_f%/*}
+          justpathnofile=${input_f%/*}
           new_path_from_root="${justpathnofile#"$transcode_directory"}"
           full_move_directory=$(echo "$move_directory$new_path_from_root" | tr -s '/')
           full_move_directory="${full_move_directory//\\,/,}"  # remove any \, s
@@ -2355,10 +2517,10 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
           short_f="${short_f//\\\\/\\}"  # remove any \\ s
           move_to_filename="$full_move_directory/$short_f"
           if [[ "$quiet" != "TRUE" ]] ; then
-            echo -e "\nMOVING PROCESSED VIDEO FILE: $log_long_f"
+            echo -e "\nMOVING PROCESSED VIDEO FILE: $log_input_f"
           fi
-          long_f="${long_f//\\$/$}"  # remove any \$ s
-          mv "$long_f" "$move_to_filename"
+          input_f="${input_f//\\$/$}"  # remove any \$ s
+          mv "$input_f" "$move_to_filename"
           if [ "$add_subs" == "TRUE" ] && [ "$subtitle_file_found" == "TRUE" ] ; then
             move_srt_short_f="${srt_f_l##*/}"
             move_srt_short_f="${move_srt_short_f//\\,/,}"  # remove any \, s
@@ -2378,10 +2540,10 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
           short_f="${short_f//\\\\/\\}"  # remove any \\ s
           move_to_filename="$move_directory$short_f"
           if [[ "$quiet" != "TRUE" ]] ; then
-            echo -e "\nMOVING PROCESSED VIDEO FILE: $log_long_f"
+            echo -e "\nMOVING PROCESSED VIDEO FILE: $log_input_f"
           fi
-          long_f="${long_f//\\$/$}"  # remove any \$ s
-          mv "$long_f" "$move_to_filename"
+          input_f="${input_f//\\$/$}"  # remove any \$ s
+          mv "$input_f" "$move_to_filename"
           if [ "$add_subs" == "TRUE" ] && [ "$subtitle_file_found" == "TRUE" ] ; then
             move_srt_short_f="${srt_f_l##*/}"
             move_srt_short_f="${move_srt_short_f//\\,/,}"  # remove any \, s
@@ -2400,7 +2562,7 @@ find "$transcode_directory"/* -type f -name "*$input_file_extension" |
 
 # Rename Folders BACK - ANY FILES THAT CONTAIN <\,> (backslash comma)
 #
-if [[ "$add_subs" == "TRUE" ]] ; then
+if [[ "$add_subs" == "TRUE" ]]; then # might as well rename even if $kill -    && [[ "$kill" != "TRUE" ]]
 	# If NOT Quiet mode - then tell about renaming files back...
 	if [[ $quiet != "TRUE" ]] ; then
     tput setaf 1
@@ -2408,9 +2570,9 @@ if [[ "$add_subs" == "TRUE" ]] ; then
 		echo -e "\nRenaming any files or directories that contained commas (now \,) back..."
     tput sgr0
 	fi
-# Rename folders BACK if commas - WORKS MAC OS & LINUX
-#
-find "$transcode_directory"/* \( -name '*\\,*' -o -name '*\\\\' \) -type d  -print0 |
+  # Rename folders BACK if commas - WORKS MAC OS & LINUX
+  #
+  find "$transcode_directory"/* \( -name '*\\,*' -o -name '*\\\\' \) -type d  -print0 |
     while IFS= read -r -d '' dir_name; do
       # SAVE CURRENT DIRECTORY
       orig_dir=$(pwd)

@@ -4,7 +4,7 @@
       encode2m4v  - Transcodes video files using HandBrakeCLI
 
 #### VERSION
-      Version 0.9.6
+      Version 0.9.7
 
 #### SUMMARY
   Encodes .mp4 files to .m4v files recursing directories to find all .mp4 files
@@ -27,7 +27,7 @@ Command line switches - provide ability to:
 
   - specifiy a "transcode directory/" to start search for video files and subtitle files.
 
-  - specify input video file extension to search for (.mp4, .mov, .mkv, ...) - (-i / --inext)
+  - specify input video file extension to search for (.mp4, .mov, .mkv, ...) or all video files (".*")- (-i / --inext)
 
   - specify output transcoded video file extension (.mp4 , .m4v, .mkv ...) - (-e / --ext)
 
@@ -42,12 +42,16 @@ Command line switches - provide ability to:
   - use a HandBrake .json settings file (-j / --json=)
 
   - upconvert the video to 1080 (-u / --upconvert) or not (-n / --noupconvert)
+  
+  - specify an upconvert level (720, 1080, 2160, 4320) (-x / --xlevel)
 
   - output the transcoded file(s) to a specified directory (-o / --output=)
 
   - re-create the input directory structure when output to a different directory (-r / --recreatedirs)
 
   - move input video and subtitle files once they have been transcoded (-m / --move=)
+  
+  - delete input file(s) after they have beed transcoded (-k / -kill)
 
   - show details of HandBrakeCLI encoding or not (-d / --details)
 
@@ -70,12 +74,14 @@ Command line switches - provide ability to:
            -t/--transopt=
            -u/--upconvert
            -n/--noupconvert
+           -x/--xlevel
            -c/--continue
            -b/--break
            -o/--output=
            -r/--recreatedirs
            -m/--move=
            -a/--all
+           -k/--kill
            -l/--logfile=
            -d/--details
            -q/--quiet
@@ -86,8 +92,7 @@ Command line switches - provide ability to:
 
 
 #### REQUIREMENTS
-  handbrakeCLI.exe  - installed in same directory, /Applications/HandBrakeCLI (Mac OS)
-                      or in PATH, or as flatpak (Linux)
+	handbrakeCLI.exe  - installed in same directory, /Applications/HandBrakeCLI (Mac OS) or in PATH, or as flatpak (Linux)
 
 #### DETAILS
 ------------
@@ -139,13 +144,16 @@ Command line switches - provide ability to:
                 Subtitle extension to include into Output file. Must end in .srt (SubRipper type) (Enclose in quotes ".ext")
 
             -t, --transopt=
-                Transcoding options to use when calling HandBrakeCLI (Enclose in quotes "----")
+                Transcoding options to use when calling HandBrakeCLI (Enclose in quotes "<options>")
 
             -u, --upconvert
-                Upconvert all encoded files.
+                Upconvert all encoded files. Not necessary if using -x / --xlevel.
 
             -n, --noupconvert
-                Do NOT upconvert all encoded vided files.
+                Do NOT upconvert all encoded vided files. Must be specified or prompts will occur.
+                
+            -x, --xlevel=
+                Set upconvert level (720, 1080, 2160, 4320).
 
             -c, --continue
                 Continue encoding if a file is missing the designated subtitle file for the video file.
@@ -161,6 +169,9 @@ Command line switches - provide ability to:
 
             -m, --move=
                 Directory to move all source files into (out of root directory) once they have been re-encoded.
+            
+            -k, --kill
+                Delete (kill) all source files once they have been re-encoded. Takes prescedence over -m / --move.
 
             -l, --logfile=
                 Logfile filename to use to log information to a .json format log file. (Enclose in quotes "logfile.json")
