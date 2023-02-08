@@ -326,348 +326,349 @@ declare -a HandBrakeCLI_upconvert_options_array=("--width 1280 --height 720"
 default_HandBrakeCLI_upconvert_option="$HandBrakeCLI_upconvert_1080_option"
 HandBrakeCLI_upconvert_option="$default_HandBrakeCLI_upconvert_option"
 HandBrakeCLI_upconvert_option_set="not set"
-# VALID PRESETS FROM HandBrakeCLI v1.6.0:
+# VALID PRESETS FROM HandBrakeCLI v1.6.1:
 preset_list="Valid presets are:
     General/
         Very Fast 2160p60 4K AV1
-		        AV1 video (up to 2160p60) and AAC stereo audio, in an MP4
-		        container.
+            AV1 video (up to 2160p60) and AAC stereo audio, in an MP4
+            container.
         Very Fast 2160p60 4K HEVC
-		        H.265 video (up to 2160p60) and AAC stereo audio, in an MP4
-		        container.
+            H.265 video (up to 2160p60) and AAC stereo audio, in an MP4
+            container.
         Very Fast 1080p30
-		        Small H.264 video (up to 1080p30) and AAC stereo audio, in
-		        an MP4 container.
+            Small H.264 video (up to 1080p30) and AAC stereo audio, in
+            an MP4 container.
         Very Fast 720p30
-		        Small H.264 video (up to 720p30) and AAC stereo audio, in an
-		        MP4 container.
+            Small H.264 video (up to 720p30) and AAC stereo audio, in an
+            MP4 container.
         Very Fast 576p25
-		        Small H.264 video (up to 576p25) and AAC stereo audio, in an
-		        MP4 container.
+            Small H.264 video (up to 576p25) and AAC stereo audio, in an
+            MP4 container.
         Very Fast 480p30
-		        Small H.264 video (up to 480p30) and AAC stereo audio, in an
-		        MP4 container.
+            Small H.264 video (up to 480p30) and AAC stereo audio, in an
+            MP4 container.
         Fast 2160p60 4K AV1
-		        AV1 video (up to 2160p60) and AAC stereo audio, in an MP4
-		        container.
+            AV1 video (up to 2160p60) and AAC stereo audio, in an MP4
+            container.
         Fast 2160p60 4K HEVC
-		        H.265 video (up to 2160p60) and AAC stereo audio, in an MP4
-		        container.
+            H.265 video (up to 2160p60) and AAC stereo audio, in an MP4
+            container.
         Fast 1080p30
-		        H.264 video (up to 1080p30) and AAC stereo audio, in an MP4
-		        container.
+            H.264 video (up to 1080p30) and AAC stereo audio, in an MP4
+            container.
         Fast 720p30
-		        H.264 video (up to 720p30) and AAC stereo audio, in an MP4
-		        container.
+            H.264 video (up to 720p30) and AAC stereo audio, in an MP4
+            container.
         Fast 576p25
-		        H.264 video (up to 576p25) and AAC stereo audio, in an MP4
-		        container.
+            H.264 video (up to 576p25) and AAC stereo audio, in an MP4
+            container.
         Fast 480p30
-		        H.264 video (up to 480p30) and AAC stereo audio, in an MP4
-		        container.
+            H.264 video (up to 480p30) and AAC stereo audio, in an MP4
+            container.
         HQ 2160p60 4K AV1 Surround
-		        High quality AV1 video (up to 2160p60), AAC stereo audio,
-		        and Dolby Digital (AC-3) surround audio, in an MP4
-		        container.
+            High quality AV1 video (up to 2160p60), AAC stereo audio,
+            and Dolby Digital (AC-3) surround audio, in an MP4
+            container.
         HQ 2160p60 4K HEVC Surround
-		        High quality H.265 video (up to 2160p60), AAC stereo audio,
-		        and Dolby Digital (AC-3) surround audio, in an MP4
-		        container.
+            High quality H.265 video (up to 2160p60), AAC stereo audio,
+            and Dolby Digital (AC-3) surround audio, in an MP4
+            container.
         HQ 1080p30 Surround
-		        High quality H.264 video (up to 1080p30), AAC stereo audio,
-		        and Dolby Digital (AC-3) surround audio, in an MP4
-		        container.
+            High quality H.264 video (up to 1080p30), AAC stereo audio,
+            and Dolby Digital (AC-3) surround audio, in an MP4
+            container.
         HQ 720p30 Surround
-		        High quality H.264 video (up to 720p30), AAC stereo audio,
-		        and Dolby Digital (AC-3) surround audio, in an MP4
-		        container.
+            High quality H.264 video (up to 720p30), AAC stereo audio,
+            and Dolby Digital (AC-3) surround audio, in an MP4
+            container.
         HQ 576p25 Surround
-		        High quality H.264 video (up to 576p25), AAC stereo audio,
-		        and Dolby Digital (AC-3) surround audio, in an MP4
-		        container.
+            High quality H.264 video (up to 576p25), AAC stereo audio,
+            and Dolby Digital (AC-3) surround audio, in an MP4
+            container.
         HQ 480p30 Surround
-		        High quality H.264 video (up to 480p30), AAC stereo audio,
-		        and Dolby Digital (AC-3) surround audio, in an MP4
-		        container.
+            High quality H.264 video (up to 480p30), AAC stereo audio,
+            and Dolby Digital (AC-3) surround audio, in an MP4
+            container.
         Super HQ 2160p60 4K AV1 Surround
-		        Super high quality AV1 video (up to 2160p60), AAC stereo
-		        audio, and Dolby Digital (AC-3) surround audio, in an MP4
-		        container.
+            Super high quality AV1 video (up to 2160p60), AAC stereo
+            audio, and Dolby Digital (AC-3) surround audio, in an MP4
+            container.
         Super HQ 2160p60 4K HEVC Surround
-		        Super high quality H.265 video (up to 2160p60), AAC stereo
-		        audio, and Dolby Digital (AC-3) surround audio, in an MP4
-		        container.
+            Super high quality H.265 video (up to 2160p60), AAC stereo
+            audio, and Dolby Digital (AC-3) surround audio, in an MP4
+            container.
         Super HQ 1080p30 Surround
-		        Super high quality H.264 video (up to 1080p30), AAC stereo
-		        audio, and Dolby Digital (AC-3) surround audio, in an MP4
-		        container.
+            Super high quality H.264 video (up to 1080p30), AAC stereo
+            audio, and Dolby Digital (AC-3) surround audio, in an MP4
+            container.
         Super HQ 720p30 Surround
-		        Super high quality H.264 video (up to 720p30), AAC stereo
-		        audio, and Dolby Digital (AC-3) surround audio, in an MP4
-		        container.
+            Super high quality H.264 video (up to 720p30), AAC stereo
+            audio, and Dolby Digital (AC-3) surround audio, in an MP4
+            container.
         Super HQ 576p25 Surround
-		        Super high quality H.264 video (up to 576p25), AAC stereo
-		        audio, and Dolby Digital (AC-3) surround audio, in an MP4
-		        container.
+            Super high quality H.264 video (up to 576p25), AAC stereo
+            audio, and Dolby Digital (AC-3) surround audio, in an MP4
+            container.
         Super HQ 480p30 Surround
-		        Super high quality H.264 video (up to 480p30), AAC stereo
-		        audio, and Dolby Digital (AC-3) surround audio, in an MP4
-		        container.
+            Super high quality H.264 video (up to 480p30), AAC stereo
+            audio, and Dolby Digital (AC-3) surround audio, in an MP4
+            container.
     Web/
         Creator 2160p60 4K
-		        High quality video for publishing via online services such
-		        as Vimeo and YouTube. H.264 video (up to 2160p60) and high
-		        bit rate AAC stereo audio in an MP4 container.
+            High quality video for publishing via online services such
+            as Vimeo and YouTube. H.264 video (up to 2160p60) and high
+            bit rate AAC stereo audio in an MP4 container.
         Creator 1440p60 2.5K
-		        High quality video for publishing via online services such
-		        as Vimeo and YouTube. H.264 video (up to 1440p60) and high
-		        bit rate AAC stereo audio in an MP4 container.
+            High quality video for publishing via online services such
+            as Vimeo and YouTube. H.264 video (up to 1440p60) and high
+            bit rate AAC stereo audio in an MP4 container.
         Creator 1080p60
-		        High quality video for publishing via online services such
-		        as Vimeo and YouTube. H.264 video (up to 1080p60) and high
-		        bit rate AAC stereo audio in an MP4 container.
+            High quality video for publishing via online services such
+            as Vimeo and YouTube. H.264 video (up to 1080p60) and high
+            bit rate AAC stereo audio in an MP4 container.
         Creator 720p60
-		        High quality video for publishing via online services such
-		        as Vimeo and YouTube. H.264 video (up to 720p60) and high
-		        bit rate AAC stereo audio in an MP4 container.
+            High quality video for publishing via online services such
+            as Vimeo and YouTube. H.264 video (up to 720p60) and high
+            bit rate AAC stereo audio in an MP4 container.
         Email 25 MB 3 Minutes 720p30
-		        Up to 3 minutes of video in 25 MB or less, for sharing via
-		        email services such as Gmail. H.264 video (up to 720p30) and
-		        AAC stereo audio, in an MP4 container.
+            Up to 3 minutes of video in 25 MB or less, for sharing via
+            email services such as Gmail. H.264 video (up to 720p30) and
+            AAC stereo audio, in an MP4 container.
         Email 25 MB 5 Minutes 480p30
-		        Up to 5 minutes of video in 25 MB or less, for sharing via
-		        email services such as Gmail. H.264 video (up to 480p30) and
-		        AAC stereo audio, in an MP4 container.
+            Up to 5 minutes of video in 25 MB or less, for sharing via
+            email services such as Gmail. H.264 video (up to 480p30) and
+            AAC stereo audio, in an MP4 container.
         Email 25 MB 10 Minutes 288p30
-		        Up to 10 minutes of video in 25 MB or less, for sharing via
-		        email services such as Gmail. H.264 video (up to 288p30) and
-		        AAC stereo audio, in an MP4 container.
+            Up to 10 minutes of video in 25 MB or less, for sharing via
+            email services such as Gmail. H.264 video (up to 288p30) and
+            AAC stereo audio, in an MP4 container.
         Social 100 MB 5 Minutes 1080p30
-		        Up to 5 minutes of video in 100 MB or less, for sharing via
-		        online social communities such as Discord. H.264 video (up
-		        to 1080p30) and AAC stereo audio, in an MP4 container.
+            Up to 5 minutes of video in 100 MB or less, for sharing via
+            online social communities such as Discord. H.264 video (up
+            to 1080p30) and AAC stereo audio, in an MP4 container.
         Social 50 MB 5 Minutes 720p30
-		        Up to 5 minutes of video in 50 MB or less, for sharing via
-		        online social communities such as Discord. H.264 video (up
-		        to 720p30) and AAC stereo audio, in an MP4 container.
+            Up to 5 minutes of video in 50 MB or less, for sharing via
+            online social communities such as Discord. H.264 video (up
+            to 720p30) and AAC stereo audio, in an MP4 container.
         Social 50 MB 10 Minutes 480p30
-		        Up to 10 minutes of video in 50 MB or less, for sharing via
-		        online social communities such as Discord. H.264 video (up
-		        to 480p30) and AAC stereo audio, in an MP4 container.
+            Up to 10 minutes of video in 50 MB or less, for sharing via
+            online social communities such as Discord. H.264 video (up
+            to 480p30) and AAC stereo audio, in an MP4 container.
         Social 8 MB 3 Minutes 360p30
-		        Up to 3 minutes of video in 8 MB or less, for sharing via
-		        online social communities such as Discord. H.264 video (up
-		        to 360p30) and AAC stereo audio, in an MP4 container.
+            Up to 3 minutes of video in 8 MB or less, for sharing via
+            online social communities such as Discord. H.264 video (up
+            to 360p30) and AAC stereo audio, in an MP4 container.
     Devices/
         Amazon Fire 2160p60 4K HEVC Surround
-		        H.265 video (up to 2160p60), AAC stereo audio, and Dolby
-		        Digital (AC-3) audio, in an MP4 container. Compatible with
-		        Amazon Fire TV 3rd Generation and later; Fire TV Stick 4K;
-		        Fire TV Cube.
+            H.265 video (up to 2160p60), AAC stereo audio, and Dolby
+            Digital (AC-3) audio, in an MP4 container. Compatible with
+            Amazon Fire TV 3rd Generation and later; Fire TV Stick 4K;
+            Fire TV Cube.
         Amazon Fire 1080p30 Surround
-		        H.264 video (up to 1080p30), AAC stereo audio, and Dolby
-		        Digital (AC-3) audio, in an MP4 container. Compatible with
-		        Amazon Fire TV 1st Generation and later; Fire TV Stick 1st
-		        Generation and later; Fire HD 10 7th Generation (2017); Fire
-		        HDX 4th Generation (2014).
+            H.264 video (up to 1080p30), AAC stereo audio, and Dolby
+            Digital (AC-3) audio, in an MP4 container. Compatible with
+            Amazon Fire TV 1st Generation and later; Fire TV Stick 1st
+            Generation and later; Fire HD 10 7th Generation (2017); Fire
+            HDX 4th Generation (2014).
         Amazon Fire 720p30
-		        H.264 video (up to 720p30) and AAC stereo audio, in an MP4
-		        container. Compatible with Amazon Fire HD 4th Generation
-		        (2014) and later; Kindle Fire HDX 3rd Generation (2013);
-		        Kindle Fire HD 2nd Generation (2012) and later.
+            H.264 video (up to 720p30) and AAC stereo audio, in an MP4
+            container. Compatible with Amazon Fire HD 4th Generation
+            (2014) and later; Kindle Fire HDX 3rd Generation (2013);
+            Kindle Fire HD 2nd Generation (2012) and later.
         Android 1080p30
-		        H.264 video (up to 1080p30) and AAC stereo audio, in an MP4
-		        container. Compatible with Android devices.
+            H.264 video (up to 1080p30) and AAC stereo audio, in an MP4
+            container. Compatible with Android devices.
         Android 720p30
-		        H.264 video (up to 720p30) and AAC stereo audio, in an MP4
-		        container. Compatible with Android devices.
+            H.264 video (up to 720p30) and AAC stereo audio, in an MP4
+            container. Compatible with Android devices.
         Android 576p25
-		        H.264 video (up to 576p25) and AAC stereo audio, in an MP4
-		        container. Compatible with Android devices.
+            H.264 video (up to 576p25) and AAC stereo audio, in an MP4
+            container. Compatible with Android devices.
         Android 480p30
-		        H.264 video (up to 480p30) and AAC stereo audio, in an MP4
-		        container. Compatible with Android devices.
+            H.264 video (up to 480p30) and AAC stereo audio, in an MP4
+            container. Compatible with Android devices.
         Apple 2160p60 4K HEVC Surround
-		        H.265 video (up to 2160p60), AAC stereo audio, and Dolby
-		        Digital (AC-3) surround audio, in an MP4 container.
-		        Compatible with Apple iPhone 7 and later; Apple TV 4K.
+            H.265 video (up to 2160p60), AAC stereo audio, and Dolby
+            Digital (AC-3) surround audio, in an MP4 container.
+            Compatible with Apple iPhone 7 and later; Apple TV 4K.
         Apple 1080p60 Surround
-		        H.264 video (up to 1080p60), AAC stereo audio, and Dolby
-		        Digital (AC-3) surround audio, in an MP4 container.
-		        Compatible with Apple iPad 5th and 6th Generation; iPad mini
-		        2, 3, and 4; iPad Air 1st Generation and Air 2; iPad Pro
-		        1st, 2nd, and 3rd Generation; Apple TV 4th Generation and
-		        later.
+            H.264 video (up to 1080p60), AAC stereo audio, and Dolby
+            Digital (AC-3) surround audio, in an MP4 container.
+            Compatible with Apple iPad 5th and 6th Generation; iPad mini
+            2, 3, and 4; iPad Air 1st Generation and Air 2; iPad Pro
+            1st, 2nd, and 3rd Generation; Apple TV 4th Generation and
+            later.
         Apple 1080p30 Surround
-		        H.264 video (up to 1080p30), AAC stereo audio, and Dolby
-		        Digital (AC-3) surround audio, in an MP4 container.
-		        Compatible with Apple iPhone 5, 5s, SE, 6, 6 Plus, 6s, 6s
-		        Plus, and later; iPod touch 6th Generation; iPad 3rd, 4th
-		        Generation and later; iPad mini 1st Generation and later;
-		        Apple TV 3rd, 4th Generation and later.
+            H.264 video (up to 1080p30), AAC stereo audio, and Dolby
+            Digital (AC-3) surround audio, in an MP4 container.
+            Compatible with Apple iPhone 5, 5s, SE, 6, 6 Plus, 6s, 6s
+            Plus, and later; iPod touch 6th Generation; iPad 3rd, 4th
+            Generation and later; iPad mini 1st Generation and later;
+            Apple TV 3rd, 4th Generation and later.
         Apple 720p30 Surround
-		        H.264 video (up to 720p30), AAC stereo audio, and Dolby
-		        Digital (AC-3) surround audio, in an MP4 container.
-		        Compatible with Apple iPhone 4, 4S, and later; iPod touch
-		        4th, 5th Generation and later; iPad 1st Generation, iPad 2,
-		        and later; Apple TV 2nd Generation and later.
+            H.264 video (up to 720p30), AAC stereo audio, and Dolby
+            Digital (AC-3) surround audio, in an MP4 container.
+            Compatible with Apple iPhone 4, 4S, and later; iPod touch
+            4th, 5th Generation and later; iPad 1st Generation, iPad 2,
+            and later; Apple TV 2nd Generation and later.
         Apple 540p30 Surround
-		        H.264 video (up to 540p30), AAC stereo audio, and Dolby
-		        Digital (AC-3) surround audio, in an MP4 container.
-		        Compatible with Apple iPhone 1st Generation, 3G, 3GS, and
-		        later; iPod touch 1st, 2nd, 3rd Generation and later; iPod
-		        Classic; Apple TV 1st Generation and later.
+            H.264 video (up to 540p30), AAC stereo audio, and Dolby
+            Digital (AC-3) surround audio, in an MP4 container.
+            Compatible with Apple iPhone 1st Generation, 3G, 3GS, and
+            later; iPod touch 1st, 2nd, 3rd Generation and later; iPod
+            Classic; Apple TV 1st Generation and later.
         Chromecast 2160p60 4K HEVC Surround
-		        H.265 video (up to 2160p60), AAC stereo audio, and Dolby
-		        Digital (AC-3) surround audio, in an MP4 container.
-		        Compatible with Google Chromecast Ultra.
+            H.265 video (up to 2160p60), AAC stereo audio, and Dolby
+            Digital (AC-3) surround audio, in an MP4 container.
+            Compatible with Google Chromecast Ultra.
         Chromecast 1080p60 Surround
-		        H.264 video (up to 1080p60), AAC stereo audio, and Dolby
-		        Digital (AC-3) surround audio, in an MP4 container.
-		        Compatible with Google Chromecast 3rd Generation.
+            H.264 video (up to 1080p60), AAC stereo audio, and Dolby
+            Digital (AC-3) surround audio, in an MP4 container.
+            Compatible with Google Chromecast 3rd Generation.
         Chromecast 1080p30 Surround
-		        H.264 video (up to 1080p30), AAC stereo audio, and Dolby
-		        Digital (AC-3) surround audio, in an MP4 container.
-		        Compatible with Google Chromecast 1st, 2nd Generation and
-		        later.
+            H.264 video (up to 1080p30), AAC stereo audio, and Dolby
+            Digital (AC-3) surround audio, in an MP4 container.
+            Compatible with Google Chromecast 1st, 2nd Generation and
+            later.
         Playstation 2160p60 4K Surround
-		        H.264 video (up to 2160p60), AAC stereo audio, and Dolby
-		        Digital (AC-3) surround audio, in an MP4 container.
-		        Compatible with Playstation 4 Pro.
+            H.264 video (up to 2160p60), AAC stereo audio, and Dolby
+            Digital (AC-3) surround audio, in an MP4 container.
+            Compatible with Playstation 4 Pro.
         Playstation 1080p30 Surround
-		        H.264 video (up to 1080p30), AAC stereo audio, and Dolby
-		        Digital (AC-3) surround audio, in an MP4 container.
-		        Compatible with Playstation 3 and 4.
+            H.264 video (up to 1080p30), AAC stereo audio, and Dolby
+            Digital (AC-3) surround audio, in an MP4 container.
+            Compatible with Playstation 3 and 4.
         Playstation 720p30
-		        H.264 video (up to 720p30) and AAC stereo audio, in an MP4
-		        container. Compatible with Playstation Vita TV.
+            H.264 video (up to 720p30) and AAC stereo audio, in an MP4
+            container. Compatible with Playstation Vita TV.
         Playstation 540p30
-		        H.264 video (up to 540p30) and AAC stereo audio, in an MP4
-		        container. Compatible with Playstation Vita.
+            H.264 video (up to 540p30) and AAC stereo audio, in an MP4
+            container. Compatible with Playstation Vita.
         Roku 2160p60 4K HEVC Surround
-		        H.265 video (up to 2160p60), AAC stereo audio, and surround
-		        audio, in an MKV container. Compatible with Roku 4,
-		        Streaming Stick+, Premiere+, and Ultra.
+            H.265 video (up to 2160p60), AAC stereo audio, and surround
+            audio, in an MKV container. Compatible with Roku 4,
+            Streaming Stick+, Premiere+, and Ultra.
         Roku 1080p30 Surround
-		        H.264 video (up to 1080p30), AAC stereo audio, and Dolby
-		        Digital (AC-3) surround audio, in an MP4 container.
-		        Compatible with Roku 1080p models.
+            H.264 video (up to 1080p30), AAC stereo audio, and Dolby
+            Digital (AC-3) surround audio, in an MP4 container.
+            Compatible with Roku 1080p models.
         Roku 720p30 Surround
-		        H.264 video (up to 720p30), AAC stereo audio, and Dolby
-		        Digital (AC-3) surround audio, in an MP4 container.
-		        Compatible with Roku 720p models.
+            H.264 video (up to 720p30), AAC stereo audio, and Dolby
+            Digital (AC-3) surround audio, in an MP4 container.
+            Compatible with Roku 720p models.
         Roku 576p25
-		        H.264 video (up to 576p25) and AAC stereo audio, in an MP4
-		        container. Compatible with Roku standard definition models.
+            H.264 video (up to 576p25) and AAC stereo audio, in an MP4
+            container. Compatible with Roku standard definition models.
         Roku 480p30
-		        H.264 video (up to 480p30) and AAC stereo audio, in an MP4
-		        container. Compatible with Roku standard definition models.
+            H.264 video (up to 480p30) and AAC stereo audio, in an MP4
+            container. Compatible with Roku standard definition models.
         Xbox 1080p30 Surround
-		        H.264 video (up to 1080p30), AAC stereo audio, and Dolby
-		        Digital (AC-3) surround audio, in an MP4 container.
-		        Compatible with Xbox One.
+            H.264 video (up to 1080p30), AAC stereo audio, and Dolby
+            Digital (AC-3) surround audio, in an MP4 container.
+            Compatible with Xbox One.
     Matroska/
         AV1 MKV 2160p60 4K
-		        AV1 video (up to 2160p60) and Opus stereo audio, in an MKV
-		        container.
+            AV1 video (up to 2160p60) and Opus stereo audio, in an MKV
+            container.
         H.265 MKV 2160p60 4K
-		        H.265 video (up to 2160p60) and AAC stereo audio, in an MKV
-		        container.
+            H.265 video (up to 2160p60) and AAC stereo audio, in an MKV
+            container.
         H.265 MKV 1080p30
-		        H.265 video (up to 1080p30) and AAC stereo audio, in an MKV
-		        container.
+            H.265 video (up to 1080p30) and AAC stereo audio, in an MKV
+            container.
         H.265 MKV 720p30
-		        H.265 video (up to 720p30) and AAC stereo audio, in an MKV
-		        container.
+            H.265 video (up to 720p30) and AAC stereo audio, in an MKV
+            container.
         H.265 MKV 576p25
-		        H.265 video (up to 576p25) and AAC stereo audio, in an MKV
-		        container.
+            H.265 video (up to 576p25) and AAC stereo audio, in an MKV
+            container.
         H.265 MKV 480p30
-		        H.265 video (up to 480p30) and AAC stereo audio, in an MKV
-		        container.
+            H.265 video (up to 480p30) and AAC stereo audio, in an MKV
+            container.
         H.264 MKV 2160p60 4K
-		        H.264 video (up to 2160p60) and AAC stereo audio, in an MKV
-		        container.
+            H.264 video (up to 2160p60) and AAC stereo audio, in an MKV
+            container.
         H.264 MKV 1080p30
-		        H.264 video (up to 1080p30) and AAC stereo audio, in an MKV
-		        container.
+            H.264 video (up to 1080p30) and AAC stereo audio, in an MKV
+            container.
         H.264 MKV 720p30
-		        H.264 video (up to 720p30) and AAC stereo audio, in an MKV
-		        container.
+            H.264 video (up to 720p30) and AAC stereo audio, in an MKV
+            container.
         H.264 MKV 576p25
-		        H.264 video (up to 576p25) and AAC stereo audio, in an MKV
-		        container.
+            H.264 video (up to 576p25) and AAC stereo audio, in an MKV
+            container.
         H.264 MKV 480p30
-		        H.264 video (up to 480p30) and AAC stereo audio, in an MKV
-		        container.
+            H.264 video (up to 480p30) and AAC stereo audio, in an MKV
+            container.
         VP9 MKV 2160p60 4K
-		        VP9 video (up to 2160p60) and Opus stereo audio, in an MKV
-		        container.
+            VP9 video (up to 2160p60) and Opus stereo audio, in an MKV
+            container.
         VP9 MKV 1080p30
-		        VP9 video (up to 1080p30) and Opus stereo audio, in an MKV
-		        container.
+            VP9 video (up to 1080p30) and Opus stereo audio, in an MKV
+            container.
         VP9 MKV 720p30
-		        VP9 video (up to 720p30) and Opus stereo audio, in an MKV
-		        container.
+            VP9 video (up to 720p30) and Opus stereo audio, in an MKV
+            container.
         VP9 MKV 576p25
-		        VP9 video (up to 576p25) and Opus stereo audio, in an MKV
-		        container.
+            VP9 video (up to 576p25) and Opus stereo audio, in an MKV
+            container.
         VP9 MKV 480p30
-		        VP9 video (up to 480p30) and Opus stereo audio, in an MKV
-		        container.
+            VP9 video (up to 480p30) and Opus stereo audio, in an MKV
+            container.
     Hardware/
         AV1 QSV 2160p 4K
-		        Intel Quick Sync Video hardware accelerated AV1 video (up to
-		        2160p) and AAC stereo audio, in an MP4 container.
+            Intel Quick Sync Video hardware accelerated AV1 video (up to
+            2160p) and AAC stereo audio, in an MP4 container.
         H.265 NVENC 2160p 4K
-		        Nvidia NVENC hardware accelerated H.265 video (up to 2160p)
-		        and AAC stereo audio, in an MP4 container.
+            Nvidia NVENC hardware accelerated H.265 video (up to 2160p)
+            and AAC stereo audio, in an MP4 container.
         H.265 NVENC 1080p
-		        Nvidia NVENC hardware accelerated H.265 video (up to 1080p)
-		        and AAC stereo audio, in an MP4 container.
+            Nvidia NVENC hardware accelerated H.265 video (up to 1080p)
+            and AAC stereo audio, in an MP4 container.
         H.265 QSV 2160p 4K
-		        Intel Quick Sync Video hardware accelerated H.265 video (up
-		        to 2160p) and AAC stereo audio, in an MP4 container.
+            Intel Quick Sync Video hardware accelerated H.265 video (up
+            to 2160p) and AAC stereo audio, in an MP4 container.
         H.265 QSV 1080p
-		        Intel Quick Sync Video hardware accelerated H.265 video (up
-		        to 1080p) and AAC stereo audio, in an MP4 container.
+            Intel Quick Sync Video hardware accelerated H.265 video (up
+            to 1080p) and AAC stereo audio, in an MP4 container.
         H.265 VCN 2160p 4K
-		        AMD VCN hardware accelerated H.265 video (up to 2160p) and
-		        AAC stereo audio, in an MP4 container.
+            AMD VCN hardware accelerated H.265 video (up to 2160p) and
+            AAC stereo audio, in an MP4 container.
         H.265 VCN 1080p
-		        AMD VCN hardware accelerated H.265 video (up to 1080p) and
-		        AAC stereo audio, in an MP4 container.
+            AMD VCN hardware accelerated H.265 video (up to 1080p) and
+            AAC stereo audio, in an MP4 container.
         H.265 MF 2160p 4K
-		        Hardware accelerated H.265 video (up to 2160p) and AAC
-		        stereo audio, in an MP4 container for ARM based platforms
-		        using Media Foundation
+            Hardware accelerated H.265 video (up to 2160p) and AAC
+            stereo audio, in an MP4 container for ARM based platforms
+            using Media Foundation
         H.265 MF 1080p
-		        Hardware accelerated H.265 video (up to 1080p) and AAC
-		        stereo audio, in an MP4 container for ARM based platforms
-		        using Media Foundation
+            Hardware accelerated H.265 video (up to 1080p) and AAC
+            stereo audio, in an MP4 container for ARM based platforms
+            using Media Foundation
     Production/
         Production Max
-		        Maximum bit rate, constant frame rate H.264 video and high
-		        bit rate AAC stereo audio in an MP4 container. For
-		        professional use as an intermediate format for video
-		        editing. Creates gigantic files.
+            Maximum bit rate, constant frame rate H.264 video and high
+            bit rate AAC stereo audio in an MP4 container. For
+            professional use as an intermediate format for video
+            editing. Creates gigantic files.
         Production Standard
-		        High bit rate, constant frame rate H.264 video and high bit
-		        rate AAC stereo audio in an MP4 container. For professional
-		        use as an intermediate format for video editing. Creates
-		        very large files.
+            High bit rate, constant frame rate H.264 video and high bit
+            rate AAC stereo audio in an MP4 container. For professional
+            use as an intermediate format for video editing. Creates
+            very large files.
         Production Proxy 1080p
-		        Intra-only, constant frame rate H.264 video (up to 1080p)
-		        and high bit rate AAC stereo audio in an MP4 container. For
-		        professional use as a low resolution proxy format for video
-		        editing.
+            Intra-only, constant frame rate H.264 video (up to 1080p)
+            and high bit rate AAC stereo audio in an MP4 container. For
+            professional use as a low resolution proxy format for video
+            editing.
         Production Proxy 540p
-		        Intra-only, constant frame rate H.264 video (up to 540p) and
-		        high bit rate AAC stereo audio in an MP4 container. For
-		        professional use as a low resolution proxy format for video
-		        editing.
+            Intra-only, constant frame rate H.264 video (up to 540p) and
+            high bit rate AAC stereo audio in an MP4 container. For
+            professional use as a low resolution proxy format for video
+            editing.
     CLI Defaults/
-        CLI Default"
+        CLI Default
+"
 declare -a valid_presets_array=("Very Fast 2160p60 4K AV1"
 																"Very Fast 2160p60 4K HEVC"
 																"Very Fast 1080p30"
@@ -1168,7 +1169,9 @@ for ((arg_index=0;arg_index<$cmd_line_args_array_length;arg_index++)); do
             # FIRST SET -
             HandBrake_json_to_use="${cmd_line_args_array[(arg_index+1)]}"
             # THEN - CHECK THAT .json FILE EXISTS
-            if [[ -f "$HandBrake_json_to_use" ]]; then
+            #             if [[ -f "$HandBrake_json_to_use" ]]; then # (NOT CASE SENSITIVE)
+            ls "${HandBrake_json_to_use}"* &>/dev/null && json_found="TRUE" || json_found="FALSE"
+            if [[ "$json_found" == "TRUE" ]]; then
               HandBrake_json_to_use_set="set"
             else
               error_description="MISSING \"HandBrake .json settings file\""
@@ -1180,6 +1183,8 @@ for ((arg_index=0;arg_index<$cmd_line_args_array_length;arg_index++)); do
               echo "$cmd_line_cmd <root directory> -j \"My HandBrake settings.json\""
               echo "OR"
               echo "$cmd_line_cmd <root directory> --json=\"My HandBrake settings.json\""
+              echo ""
+              echo "FILENAMES FOR .json FILES ARE CASE SENSITIVE"
               echo ""
               echo "For full usage use the -h or --help switch."
               echo ""
@@ -1195,7 +1200,9 @@ for ((arg_index=0;arg_index<$cmd_line_args_array_length;arg_index++)); do
           # VALIDATE RIGHT SIDE FOR VALID HandBrake .json settings file
           HandBrake_json_to_use=$(echo "$arg" | grep -o '[^=]*$')
           # THEN - CHECK THAT .json FILE EXISTS
-          if [[ -f "$HandBrake_json_to_use" ]]; then
+          #             if [[ -f "$HandBrake_json_to_use" ]]; then # (NOT CASE SENSITIVE)
+          ls "${HandBrake_json_to_use}"* &>/dev/null && json_found="TRUE" || json_found="FALSE"
+          if [[ "$json_found" == "TRUE" ]]; then
             HandBrake_json_to_use_set="set"
           else
             error_description="MISSING \"HandBrake .json settings file\""
@@ -1207,7 +1214,9 @@ for ((arg_index=0;arg_index<$cmd_line_args_array_length;arg_index++)); do
             echo "$cmd_line_cmd <root directory> -j \"My HandBrake settings.json\""
             echo "OR"
             echo "$cmd_line_cmd <root directory> --json=\"My HandBrake settings.json\""
-            echo""
+            echo ""
+            echo "FILENAMES FOR .json FILES ARE CASE SENSITIVE"
+            echo ""
             echo "For full usage use the -h or --help switch."
             echo ""
             tput sgr0
@@ -2082,11 +2091,15 @@ echo "HIT ENTER TO START (or <ctl>+c to cancel)"
   echo ""
 fi
 
+# GET TOTAL NUMBER OF FILES TO PROCESS
+files_count=$(bash -c "find '$transcode_directory'* -type f \( -iname \"*${input_file_extension}\" \)" | wc -l | tr -s ' ')
+number_of_files_to_encode=($files_count)
+
 # MUST RENAME ANY FILES THAT CONTAIN <,> (comma) TEMPORARILY - IF ADDING SUBTITLES
 #
 # NEW -
 
-if [ "$add_subs" == "TRUE" ] ; then
+if [ "$add_subs" == "TRUE" ] && [ $number_of_files_to_encode -gt 0 ]; then
 	# If NOT Quiet mode - then tell about renaming files:
 	if [[ $quiet != "TRUE" ]] ; then
     tput setaf 1
@@ -2096,7 +2109,7 @@ if [ "$add_subs" == "TRUE" ] ; then
 	fi
     # SHOULD - ONLY FIND FILES WITH COMMAS...
            #  -name '*,*' -a
-    bash -c "find '$transcode_directory'/* -type f \( -iname '*.srt' -o -iname \"*${input_file_extension}\" \) -print0" |
+    bash -c "find '$transcode_directory'* -type f \( -iname '*.srt' -o -iname \"*${input_file_extension}\" \) -print0" |
       while IFS= read -r -d '' file_name; do
         # save starting directory
   			orig_dir=$(pwd)
@@ -2114,7 +2127,7 @@ if [ "$add_subs" == "TRUE" ] ; then
   	    # CD BACK TO ORIGINAL DIR
   	    cd "$orig_dir"
 	    done
-  find "$transcode_directory"/* \( -name '*,*' -o -name '*\\*' \) -type d  -print0 |
+  find "$transcode_directory"* \( -name '*,*' -o -name '*\\*' \) -type d  -print0 |
       while IFS= read -r -d '' dir_name; do
         orig_dir=$(pwd)
         dirpathnodot="${dir_name#.}"
@@ -2131,438 +2144,456 @@ if [ "$add_subs" == "TRUE" ] ; then
         cd "$orig_dir"
       done
 fi
-# TRANSCODING FILE INFO INTO LOGFILE
-if [[ "$make_log_file" == "TRUE" ]] ; then
-  # LOG FILE BEING TRANSCODED - JSON FORMAT
-  echo -e "  \"Encoded_Files_Details\" : [" >> "$output_log_file"
-fi
-# IF USING A .json FILE - ADD IT IN FRONT OF TRANSCODING OPTIONS AND SET PRESET TO ""
-if [[ "$HandBrake_json_to_use_set" == "set" ]]; then
-  HandBrake_json_preset_file_name="${HandBrake_json_to_use##*/}"
-  HandBrake_json_preset_name="${HandBrake_json_preset_file_name%\.*}"
-  HandBrakeCLI_transcoding_options="--preset-import-file \"$HandBrake_json_to_use\" -Z \"$HandBrake_json_preset_name\" $HandBrakeCLI_transcoding_options"
-  preset_to_use=""
-fi
-# GET TOTAL NUMBER OF FILES TO PROCESS
-files_count=$(bash -c "find '$transcode_directory'/* -type f \( -iname \"*${input_file_extension}\" \)" | wc -l | tr -s ' ')
-number_of_files_to_encode=($files_count)
-#
-### TRANSCODING...
-current_file_number=0
-bash -c "find '$transcode_directory'/* -type f \( -iname \"*${input_file_extension}\" \)" |
-	sort -V -k1 |
-	cut -d$'\t' -f2 |
-	tr '\n' '\0' |
-    while IFS= read -r -d '' file_name; do
-      # Increment current file number
-      ((++current_file_number))
-      input_f=$(echo "$file_name" | tr -s '/')
-      input_f="${input_f//$/\\$}"  # escape any $ s to \$
-      short_f="${file_name##*/}"
-      out_f="${short_f%\.*}$output_file_extension"
-      if [ "$output_directory" == "./" ] ; then
-        out_f_l=$(echo "${file_name%\.*}$output_file_extension" | tr -s '/')
-        out_f_l="${out_f_l//$/\\$}"  # escape any $ s to \$
-      elif [ "$make_directory_structure" == "TRUE" ] ; then
-        justpathnofile=${file_name%/*}
-        #
-        new_path_from_root="${justpathnofile#"$transcode_directory"}"
-        directory_to_create=$(echo "$output_directory$new_path_from_root" | tr -s '/')
-        directory_to_create="${directory_to_create//\\,/,}"  # remove any \, s
-        directory_to_create="${directory_to_create//\\\\/\\}"  # remove any \\ s
-        # MAKE NEW DIRECTORY
-        mkdir -p "$directory_to_create" > /dev/null 2>&1
-        # NEW
-        out_f="${out_f//\\,/,}"  # remove any \, s
-        out_f="${out_f//\\\\/\\}"  # remove any \\ s
-        out_f_l=$(echo "$directory_to_create/$out_f" | tr -s '/')
-        out_f_l="${out_f_l//$/\\$}"  # escape any $ s to \$
-      else # Output to another out directory but do NOT create directory structure
-        out_f="${out_f//\\,/,}"  # remove any \, s
-        out_f="${out_f//\\\\/\\}"  # remove any \\ s
-        out_f_l=$(echo "$output_directory$out_f" | tr -s '/')
-        out_f_l="${out_f_l//$/\\$}"  # escape any $ s to \$
-      fi
-      if [[ "$add_subs" == "TRUE" ]]; then
-        srt_f="${short_f%\.*}"$subtitle_extension
-        srt_f_l=$(echo "${file_name%\.*}$subtitle_extension" | tr -s '/')
-        # CHECK FOR SUBTITLE FILE EXISTANCE
-        if [[ -f $srt_f_l ]]; then
-          subtitle_file_found="TRUE"
-        else
-          subtitle_file_found="FALSE"
-        fi
-        srt_f_l="${srt_f_l//$/\\$}"  # escape any $ s to \$
-      fi
-      # TRANSCODING FILE INFO INTO LOGFILE
-      if [[ "$make_log_file" == "TRUE" ]] ; then
-        # LOG FILE BEING TRANSCODED - JSON FORMAT
-        echo "    {" >> "$output_log_file"
-        log_input_f="${input_f//\\,/,}"
-        log_input_f="${log_input_f//\\\\/\\}"
-        log_input_f="${log_input_f//\\\\/\\}"
-        log_input_f="${log_input_f//\\$/$}"  # NEW FOR ESCAPED $ s (\$)
-        log_input_f="${log_input_f//\\/\\\\}" # I DONT KNOW WHY THIS IS NOT NEEDED... the & puts what was found back in...
-        echo "      \"input_f\" : \"${log_input_f}\"," >> "$output_log_file"
-        log_out_f_l="${out_f_l//\\,/,}"
-        log_out_f_l="${log_out_f_l//\\\\/\\}"
-        log_out_f_l="${log_out_f_l//\\\\/\\}"
-        log_out_f_l="${log_out_f_l//\\$/$}"  # NEW FOR ESCAPED $ s (\$)
-        log_out_f_l="${log_out_f_l//\\/\\\\}"
-        echo "      \"out_f_l\" : \"${log_out_f_l}\"," >> "$output_log_file"
-        log_srt_f_l="${srt_f_l//\\,/,}"
-        log_srt_f_l="${log_srt_f_l//\\\\/\\}"
-        log_srt_f_l="${log_srt_f_l//\\\\/\\}"
-        log_srt_f_l="${log_srt_f_l//\\$/$}"  # NEW FOR ESCAPED $ s (\$)
-        log_srt_f_l="${log_srt_f_l//\\/\\\\}"
-        echo "      \"srt_f_l\" : \"${log_srt_f_l}\"," >> "$output_log_file"
-        echo "      \"subtitle_file_found\" : \"$subtitle_file_found\"," >> "$output_log_file"
-        echo "      \"current_file_number\" : \"$current_file_number\"," >> "$output_log_file"
-        printf "      \"number_of_files_to_encode\" : \"$number_of_files_to_encode\"" >> "$output_log_file"
-      fi
-      if [[ "$subtitle_file_found" == "FALSE" ]] && [[ "$continue" == "FALSE" ]]; then
-        #MISSING SUBTITLE FILE AND continue IS SET TO STOP IF MISSING
-        error_description="MISSING SUBTITLE FILE"
-        echo ""
-        tput setaf 1
-  			tput setab 7
-        echo -e "STOPPING THE ENCODING: Subtitle file is missing."
-        echo -e "MISSING FILE: "
-        echo -e "   $srt_f_l"
-        echo -e ""
-        tput sgr0
-        printf \\n
-        # CLOSING ENCODING SECTION OF LOGFILE
-        if [[ "$make_log_file" == "TRUE" ]] ; then
-          # CLOSE SECTION LOG FILE BEING TRANSCODED - JSON FORMAT
-          echo -e "\n    }" >> "$output_log_file"
-        fi
-        error_exit "${error_description}"
-        # exit 1
-      elif [[ "$subtitle_file_found" == "FALSE" ]] && [[ "$continue" == "TRUE" ]]; then
-         # SUBS NOT FOUND - SET TO SKIP ADDING - CONTINUE IS TRUE
-        add_subs_skip="TRUE"
-        # ADD COMMA AFTER subtitle_file_found IN LOGFILE
-        if [[ "$make_log_file" == "TRUE" ]] ; then
-          # CLOSE SECTION LOG FILE BEING TRANSCODED - JSON FORMAT
-          printf ",\n" >> "$output_log_file"
-        fi
-      else
-        # ADD COMMA AFTER subtitle_file_found IN LOGFILE
-        if [[ "$make_log_file" == "TRUE" ]] ; then
-          # CLOSE SECTION LOG FILE BEING TRANSCODED - JSON FORMAT
-          printf ",\n" >> "$output_log_file"
-        fi
-      fi
-  		# If NOT Quiet mode - then display what file is being encoded:
-  		if [[ "$quiet" != "TRUE" ]] ; then
-  			echo ""
-        tput setaf 1
-  			tput setab 7
-        the_from_directory=$(echo "${file_name%/*}" | tr -s '/')
-        the_from_directory=$(echo "${the_from_directory//\\,/,}" | tr -s '/')
-        the_from_directory=$(echo "${the_from_directory//\\\\,/\\}" | tr -s '/')
-        the_from_directory=$(echo "${the_from_directory//\/\//\/}" | tr -s '/')  # new for two / s
-        if [[ "$the_from_directory" == "./" ]]; then
-          the_from_directory="."
-        fi
-        echo -e "Encoding file number $current_file_number of $number_of_files_to_encode total files to encode:"
-        echo ""
-        echo "From directory: $the_from_directory/"
-        echo ""
-        the_short_f=$(echo "${short_f//\\,/,}" | tr -s '/')
-        the_short_f=$(echo "${the_short_f//\\\\/\\}" | tr -s '/')
-        the_out_f=$(echo "${out_f//\\,/,}" | tr -s '/')
-        the_out_f=$(echo "${the_out_f//\\\\/\\}" | tr -s '/')
-        the_srt_f=$(echo "${srt_f//\\,/,}" | tr -s '/')
-        the_srt_f=$(echo "${the_srt_f//\\\\/\\}" | tr -s '/')
-  			if [[ "$add_subs" == "TRUE" ]] && [[ "$subtitle_file_found" == "TRUE" ]] ; then
-  				echo "ENCODING FILE - \"$the_short_f\" - TO \"$the_out_f\" - WITH SUBTITLE FILE \"$the_srt_f\""
-        elif [[ "$add_subs" == "TRUE" ]] && [[ "$subtitle_file_found" == "FALSE" ]] && [[ "$continue" == "TRUE" ]] ; then
-          echo "ENCODING FILE - \"$the_short_f\" - TO \"$the_out_f\" - WITHOUT MISSING SUBTITLE FILE \"$the_srt_f\""
-  			else
-  				echo "ENCODING FILE - \"$the_short_f\" - TO \"$the_out_f\""
-  			fi
-        echo ""
+
+if [[ $number_of_files_to_encode -gt 0 ]]; then
+
+  # TRANSCODING FILE INFO INTO LOGFILE
+  if [[ "$make_log_file" == "TRUE" ]] ; then
+    # LOG FILE BEING TRANSCODED - JSON FORMAT
+    echo -e "  \"Encoded_Files_Details\" : [" >> "$output_log_file"
+  fi
+  # IF USING A .json FILE - ADD IT IN FRONT OF TRANSCODING OPTIONS AND SET PRESET TO ""
+  if [[ "$HandBrake_json_to_use_set" == "set" ]]; then
+    HandBrake_json_preset_file_name="${HandBrake_json_to_use##*/}"
+    HandBrake_json_preset_name="${HandBrake_json_preset_file_name%\.*}"
+    HandBrakeCLI_transcoding_options="--preset-import-file \"$HandBrake_json_to_use\" -Z \"$HandBrake_json_preset_name\" $HandBrakeCLI_transcoding_options"
+    preset_to_use=""
+  fi
+
+  #
+  ### TRANSCODING...
+  current_file_number=0
+  bash -c "find '$transcode_directory'* -type f \( -iname \"*${input_file_extension}\" \)" |
+  	sort -V -k1 |
+  	cut -d$'\t' -f2 |
+  	tr '\n' '\0' |
+      while IFS= read -r -d '' file_name; do
+        # Increment current file number
+        ((++current_file_number))
+        input_f=$(echo "$file_name" | tr -s '/')
+        input_f="${input_f//$/\\$}"  # escape any $ s to \$
+        short_f="${file_name##*/}"
+        out_f="${short_f%\.*}$output_file_extension"
         if [ "$output_directory" == "./" ] ; then
-          the_out_directory=$(echo "${file_name%/*}" | tr -s '/')
-          the_out_directory=$(echo "${the_out_directory//\\,/,}" | tr -s '/')
-          the_out_directory=$(echo "${the_out_directory//\\\\/\\}" | tr -s '/')
-          the_out_directory=$(echo "${the_out_directory//\\\\/\\}" | tr -s '/')
-          the_out_directory=$(echo "${the_out_directory//\/\//\/}" | tr -s '/') # new for two / s
-          if [[ "$the_out_directory" == "./" ]]; then
-            the_out_directory="."
-          fi
-          echo "To Output directory: $the_out_directory/"
-        else
-          the_out_directory=$(echo "${out_f_l%/*}" | tr -s '/')
-          the_out_directory=$(echo "${the_out_directory//\\,/,}" | tr -s '/')
-          the_out_directory=$(echo "${the_out_directory//\\\\/\\}" | tr -s '/')
-          the_out_directory=$(echo "${the_out_directory//\\\\/\\}" | tr -s '/')
-          echo "To Output directory: $the_out_directory/"
-        fi
-  			tput sgr0
-  			printf \\n
-
-        # IF SET TO SKIP (BECAUSE CONTINUE IS TRUE AND ...) THEN TEMP SET add_subs TO FALSE
-        if [[ "$add_subs_skip" == "TRUE" ]]; then
-          add_subs="FALSE"
-        fi
-
-        # set the preset or Not
-        if [[ "$preset_to_use" != "" ]]; then
-          the_preset="--preset \"$preset_to_use\" "
-          log_the_preset="--preset '$preset_to_use' "
-        else
-          the_preset=""
-        fi
-
-  			if [ "$add_subs" == "TRUE" ] && [ "$up_convert" == "TRUE" ] ; then
-          # IF SAVING LOG FILE
-          if [[ "$make_log_file" == "TRUE" ]] ; then
-            # Save ENCODE COMMAND to log file - JSON FORMAT
-            the_encode_command="$HandBreakCLIProg $log_the_preset--input '${log_input_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file '${log_srt_f_l}' ${HandBrakeCLI_srt_language} </dev/null"
-            log_the_encode_command="${the_encode_command//\\\\\\\\/\\\\}" # 4 \s to 2 \s BACKSLASHES
-            log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
-            log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
-            log_the_encode_command="${the_encode_command//\\/\\\\}" # ESCAPE ANY BACKSLASHES
-            log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
-            log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE $ WITH SINGLE
-            log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
-            echo "      \"encode2m4v_encode_command\" : \"${log_the_encode_command}\"" >> "$output_log_file"
-            printf "    }" >> "$output_log_file"
-          fi
-          if [[ "$details" == "TRUE" ]]; then
-            # TRANSCODE
-            bash -c "$HandBreakCLIProg $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file \"${srt_f_l}\" ${HandBrakeCLI_srt_language} </dev/null"
-          else # NO DETAILS (DEFAULT)
-            echo -e "\nENCODING VIDEO FILE: $log_input_f"
-            bash -c "$HandBreakCLIProg $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file \"${srt_f_l}\" ${HandBrakeCLI_srt_language} </dev/null > /dev/null 2>&1"
-          fi
-
-  			elif [ "$add_subs" == "TRUE" ] && [ "$up_convert" == "FALSE" ] ; then  # NO - UP-CONVERT
-          # IF SAVING LOG FILE
-          if [[ "$make_log_file" == "TRUE" ]] ; then
-            # Save ENCODE COMMAND to log file - JSON FORMAT
-            the_encode_command="$HandBreakCLIProg $log_the_preset--input '${log_input_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file '${log_srt_f_l}' ${HandBrakeCLI_srt_language} </dev/null"
-            log_the_encode_command="${the_encode_command//\\\\\\\\/\\\\}" # 4 \s to 2 \s BACKSLASHES
-            log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
-            log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
-            log_the_encode_command="${the_encode_command//\\/\\\\}" # ESCAPE ANY BACKSLASHES
-            log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
-            log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE \$ WITH SINGLE $
-            log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
-            echo "      \"encode2m4v_encode_command\" : \"${log_the_encode_command}\"" >> "$output_log_file"
-            printf "    }" >> "$output_log_file"
-          fi
-          if [[ "$details" == "TRUE" ]]; then
-            # TRANSCODE
-            bash -c "$HandBreakCLIProg $the_preset--input \"$input_f\" --output \"$out_f_l\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file \"$srt_f_l\" ${HandBrakeCLI_srt_language} </dev/null"
-          else # NO DETAILS
-            echo -e "\nENCODING VIDEO FILE: $log_input_f"
-            bash -c "$HandBreakCLIProg $the_preset--input \"$input_f\" --output \"$out_f_l\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file \"$srt_f_l\" ${HandBrakeCLI_srt_language} </dev/null > /dev/null 2>&1"
-          fi
-  			elif [ "$add_subs" == "FALSE" ] && [ "$up_convert" == "TRUE" ] ; then  # NO - SUBS BUT YES UP-CONVERT
-          # IF SAVING LOG FILE
-          if [[ "$make_log_file" == "TRUE" ]] ; then
-            # Save ENCODE COMMAND to log file - JSON FORMAT
-            the_encode_command="$HandBreakCLIProg $log_the_preset--input '${log_input_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option}  </dev/null"
-            log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
-            log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE \$ WITH SINGLE $
-            log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
-            echo "      \"encode2m4v_encode_command\" : \"${log_the_encode_command}\"" >> "$output_log_file"
-            printf "    }" >> "$output_log_file"
-          fi
-          if [[ "$details" == "TRUE" ]]; then
-            # TRANSCODE
-            bash -c "$HandBreakCLIProg $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option}  </dev/null"
-          else # NO DETAILS
-            echo -e "\nENCODING VIDEO FILE: $log_input_f"
-            bash -c "$HandBreakCLIProg $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option}  </dev/null > /dev/null 2>&1"
-          fi
-
-  			else  # NO SUBS & NO UP-CONVERT
-          # IF SAVING LOG FILE
-          if [[ "$make_log_file" == "TRUE" ]] ; then
-            # Save ENCODE COMMAND to log file - JSON FORMAT
-            the_encode_command="$HandBreakCLIProg $log_the_preset--input '${log_input_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} </dev/null"
-            log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
-            log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE \$ WITH SINGLE $
-            log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
-            echo "      \"encode2m4v_encode_command\" : \"${log_the_encode_command}\"" >> "$output_log_file"
-            printf "    }" >> "$output_log_file"
-          fi
-          if [[ "$details" == "TRUE" ]]; then
-            # TRANSCODE
-            bash -c "$HandBreakCLIProg $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} </dev/null"
-          else  # NO DETAILS
-            echo -e "\nENCODING VIDEO FILE: $log_input_f"
-            bash -c "$HandBreakCLIProg $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} </dev/null > /dev/null 2>&1"
-          fi
-
-  			fi
-  		else # Quiet
-        # IF SET TO SKIP (BECAUSE CONTINUE IS TRUE AND ...) THEN TEMP SET add_subs TO FALSE
-        if [[ "$add_subs_skip" == "TRUE" ]]; then
-          add_subs="FALSE"
-        fi
-
-  			# encoding, but output to dev null... D
-  			if [ "$add_subs" == "TRUE" ] && [ "$up_convert" == "TRUE" ] ; then
-          # IF SAVING LOG FILE
-          if [[ "$make_log_file" == "TRUE" ]] ; then
-            # Save ENCODE COMMAND to log file - JSON FORMAT
-            the_encode_command="$HandBreakCLIProg  --verbose=1 $log_the_preset--input '${log_input_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file '${log_srt_f_l}' ${HandBrakeCLI_srt_language} </dev/null > /dev/null 2>&1"
-            log_the_encode_command="${the_encode_command//\\\\\\\\/\\\\}" # 4 \s to 2 \s BACKSLASHES
-            log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
-            log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
-            log_the_encode_command="${the_encode_command//\\/\\\\}" # ESCAPE ANY BACKSLASHES
-            log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
-            log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE \$ WITH SINGLE $
-            log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
-            echo "      \"encode2m4v_encode_command\" : \"${log_the_encode_command}\"" >> "$output_log_file"
-            printf "    }" >> "$output_log_file"
-          fi
-          # TRANSCODE
-          bash -c "$HandBreakCLIProg  --verbose=1 $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file \"${srt_f_l}\" ${HandBrakeCLI_srt_language} </dev/null > /dev/null 2>&1"
-
-  			elif [ "$add_subs" == "TRUE" ] && [ "$up_convert" == "FALSE" ] ; then  # NO - UP-CONVERT
-          # IF SAVING LOG FILE
-          if [[ "$make_log_file" == "TRUE" ]] ; then
-            # Save ENCODE COMMAND to log file - JSON FORMAT
-            the_encode_command="$HandBreakCLIProg  --verbose=1 $log_the_preset--input '${log_input_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file '${log_srt_f_l}' ${HandBrakeCLI_srt_language} </dev/null > /dev/null 2>&1"
-            log_the_encode_command="${the_encode_command//\\\\\\\\/\\\\}" # 4 \s to 2 \s BACKSLASHES
-            log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
-            log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
-            log_the_encode_command="${the_encode_command//\\/\\\\}" # ESCAPE ANY BACKSLASHES
-            log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
-            log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE \$ WITH SINGLE $
-            log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
-            echo "      \"encode2m4v_encode_command\" : \"${log_the_encode_command}\"" >> "$output_log_file"
-            printf "    }" >> "$output_log_file"
-          fi
-          # TRANSCODE
-          bash -c "$HandBreakCLIProg  --verbose=1 $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file \"${srt_f_l}\" ${HandBrakeCLI_srt_language} </dev/null > /dev/null 2>&1"
-
-  			elif [ "$add_subs" == "FALSE" ] && [ "$up_convert" == "TRUE" ] ; then  # NO - SUBS BUT YES UP-CONVERT
-          # IF SAVING LOG FILE
-          if [[ "$make_log_file" == "TRUE" ]] ; then
-            # Save ENCODE COMMAND to log file - JSON FORMAT
-            the_encode_command="$HandBreakCLIProg  --verbose=1 $log_the_preset--input '${log_input_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} </dev/null > /dev/null 2>&1"
-            log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
-            log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE \$ WITH SINGLE $
-            log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
-            echo "      \"encode2m4v_encode_command\" : \"${log_the_encode_command}\"" >> "$output_log_file"
-            printf "    }" >> "$output_log_file"
-          fi
-          # TRANSCODE
-          bash -c "$HandBreakCLIProg  --verbose=1 $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} </dev/null > /dev/null 2>&1"
-
-  			else  # NO SUBS & NO UP-CONVERT
-          # IF SAVING LOG FILE
-          if [[ "$make_log_file" == "TRUE" ]] ; then
-            # Save ENCODE COMMAND to log file - JSON FORMAT
-            the_encode_command="$HandBreakCLIProg  --verbose=1 $log_the_preset--input '${log_input_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} </dev/null > /dev/null 2>&1"
-            log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
-            log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE \$ WITH SINGLE $
-            log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
-            echo "      \"encode2m4v_encode_command\" : \"${log_the_encode_command}\"" >> "$output_log_file"
-            printf "    }" >> "$output_log_file"
-          fi
-          #TRANSCODE
-          bash -c "$HandBreakCLIProg  --verbose=1 $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} </dev/null > /dev/null 2>&1"
-
-  			fi
-  		fi
-      # LOG FILE - IF NOT LAST FILE PROCESSED THEN PUT COMMA - ELSE PUT NEWLINE
-      #
-      #  $current_file_number of $number_of_files_to_encode
-      #
-      if [[ "$make_log_file" == "TRUE" ]] ; then
-        if [[ $current_file_number -lt $number_of_files_to_encode ]]; then
-          printf ",\n" >> "$output_log_file"
-        else
-          printf "\n" >> "$output_log_file"
-        fi
-      fi
-
-      if [[ "$add_subs_skip" == "TRUE" ]]; then # RESET TO TEST FOR NEXT SUBTITLE FILE
-        add_subs="TRUE"
-        add_subs_skip="FALSE"
-      fi
-      if [[ "$kill" == "TRUE" ]]; then # DELETE INPUT FILES IF kill IS TRUE
-        input_f="${input_f//\\$/$}"  # remove any \$ s
-        if [[ "$quiet" != "TRUE" ]] ; then
-          echo -e "\nDELETING PROCESSED VIDEO FILE: $input_f"
-        fi
-        rm "${input_f}" > /dev/null 2>&1
-        if [ "$add_subs" == "TRUE" ] && [ "$subtitle_file_found" == "TRUE" ]; then
-          srt_f_l="${srt_f_l//\\$/$}"  # remove any \$ s
-          if [[ "$quiet" != "TRUE" ]] ; then
-            echo -e "\nDELETING INCLUDED SUBTITLE FILE: $srt_f_l"
-          fi
-          rm "${srt_f_l}" > /dev/null 2>&1
-        fi
-      elif [[ "$move_directory_set" == "set" ]]; then # MOVE INPUT FILES IF move_DIRECTORY IS SET
-        if [ "$make_directory_structure" == "TRUE" ] ; then
-          justpathnofile=${input_f%/*}
+          out_f_l=$(echo "${file_name%\.*}$output_file_extension" | tr -s '/')
+          out_f_l="${out_f_l//$/\\$}"  # escape any $ s to \$
+        elif [ "$make_directory_structure" == "TRUE" ] ; then
+          justpathnofile=${file_name%/*}
+          #
           new_path_from_root="${justpathnofile#"$transcode_directory"}"
-          full_move_directory=$(echo "$move_directory$new_path_from_root" | tr -s '/')
-          full_move_directory="${full_move_directory//\\,/,}"  # remove any \, s
-          full_move_directory="${full_move_directory//\\$/$}"  # remove any \$ s
-          full_move_directory="${full_move_directory//\\\\/\\}"  # remove any \\ s
-          mkdir -p "$full_move_directory" > /dev/null 2>&1
-          short_f="${short_f//\\,/,}"  # remove any \, s
-          short_f="${short_f//\\$/$}"  # remove any \$ s
-          short_f="${short_f//\\\\/\\}"  # remove any \\ s
-          move_to_filename="$full_move_directory/$short_f"
-          if [[ "$quiet" != "TRUE" ]] ; then
-            echo -e "\nMOVING PROCESSED VIDEO FILE: $log_input_f"
+          directory_to_create=$(echo "$output_directory$new_path_from_root" | tr -s '/')
+          directory_to_create="${directory_to_create//\\,/,}"  # remove any \, s
+          directory_to_create="${directory_to_create//\\\\/\\}"  # remove any \\ s
+          # MAKE NEW DIRECTORY
+          mkdir -p "$directory_to_create" > /dev/null 2>&1
+          # NEW
+          out_f="${out_f//\\,/,}"  # remove any \, s
+          out_f="${out_f//\\\\/\\}"  # remove any \\ s
+          out_f_l=$(echo "$directory_to_create/$out_f" | tr -s '/')
+          out_f_l="${out_f_l//$/\\$}"  # escape any $ s to \$
+        else # Output to another out directory but do NOT create directory structure
+          out_f="${out_f//\\,/,}"  # remove any \, s
+          out_f="${out_f//\\\\/\\}"  # remove any \\ s
+          out_f_l=$(echo "$output_directory$out_f" | tr -s '/')
+          out_f_l="${out_f_l//$/\\$}"  # escape any $ s to \$
+        fi
+        if [[ "$add_subs" == "TRUE" ]]; then
+          srt_f="${short_f%\.*}"$subtitle_extension
+          srt_f_l=$(echo "${file_name%\.*}$subtitle_extension" | tr -s '/')
+          # CHECK FOR SUBTITLE FILE EXISTANCE
+          #               if [[ -f $srt_f_l ]]; then     # (NOT CASE SENSITIVE)
+          ls "${srt_f_l}"* &>/dev/null && srt_f_l_found="TRUE" || srt_f_l_found="FALSE"
+          if [[ "$srt_f_l_found" == "TRUE" ]]; then
+            subtitle_file_found="TRUE"
+          else
+            subtitle_file_found="FALSE"
           fi
-          input_f="${input_f//\\$/$}"  # remove any \$ s
-          mv "$input_f" "$move_to_filename"
-          if [ "$add_subs" == "TRUE" ] && [ "$subtitle_file_found" == "TRUE" ] ; then
-            move_srt_short_f="${srt_f_l##*/}"
-            move_srt_short_f="${move_srt_short_f//\\,/,}"  # remove any \, s
-            move_srt_short_f="${move_srt_short_f//\\$/$}"  # remove any \$ s
-            move_srt_short_f="${move_srt_short_f//\\\\/\\}"  # remove any \\ s
-            move_srt_to_filename="$full_move_directory/$move_srt_short_f"
-            if [[ "$quiet" != "TRUE" ]] ; then
-              echo -e "\nMOVING INCLUDED SUBTITLE FILE: $log_srt_f_l"
-            fi
-            srt_f_l="${srt_f_l//\\$/$}"  # remove any \$ s
-            mv "$srt_f_l" "$move_srt_to_filename"
+          srt_f_l="${srt_f_l//$/\\$}"  # escape any $ s to \$
+        fi
+        # TRANSCODING FILE INFO INTO LOGFILE
+        if [[ "$make_log_file" == "TRUE" ]] ; then
+          # LOG FILE BEING TRANSCODED - JSON FORMAT
+          echo "    {" >> "$output_log_file"
+          log_input_f="${input_f//\\,/,}"
+          log_input_f="${log_input_f//\\\\/\\}"
+          log_input_f="${log_input_f//\\\\/\\}"
+          log_input_f="${log_input_f//\\$/$}"  # NEW FOR ESCAPED $ s (\$)
+          log_input_f="${log_input_f//\\/\\\\}" # I DONT KNOW WHY THIS IS NOT NEEDED... the & puts what was found back in...
+          echo "      \"input_f\" : \"${log_input_f}\"," >> "$output_log_file"
+          log_out_f_l="${out_f_l//\\,/,}"
+          log_out_f_l="${log_out_f_l//\\\\/\\}"
+          log_out_f_l="${log_out_f_l//\\\\/\\}"
+          log_out_f_l="${log_out_f_l//\\$/$}"  # NEW FOR ESCAPED $ s (\$)
+          log_out_f_l="${log_out_f_l//\\/\\\\}"
+          echo "      \"out_f_l\" : \"${log_out_f_l}\"," >> "$output_log_file"
+          log_srt_f_l="${srt_f_l//\\,/,}"
+          log_srt_f_l="${log_srt_f_l//\\\\/\\}"
+          log_srt_f_l="${log_srt_f_l//\\\\/\\}"
+          log_srt_f_l="${log_srt_f_l//\\$/$}"  # NEW FOR ESCAPED $ s (\$)
+          log_srt_f_l="${log_srt_f_l//\\/\\\\}"
+          echo "      \"srt_f_l\" : \"${log_srt_f_l}\"," >> "$output_log_file"
+          echo "      \"subtitle_file_found\" : \"$subtitle_file_found\"," >> "$output_log_file"
+          echo "      \"current_file_number\" : $current_file_number," >> "$output_log_file"
+          printf "      \"number_of_files_to_encode\" : $number_of_files_to_encode" >> "$output_log_file"
+        fi
+        if [[ "$subtitle_file_found" == "FALSE" ]] && [[ "$continue" == "FALSE" ]]; then
+          #MISSING SUBTITLE FILE AND continue IS SET TO STOP IF MISSING
+          error_description="MISSING SUBTITLE FILE"
+          echo ""
+          tput setaf 1
+    			tput setab 7
+          echo -e "STOPPING THE ENCODING: Subtitle file is missing."
+          echo -e "MISSING FILE: "
+          echo -e "   $srt_f_l"
+          echo -e ""
+          tput sgr0
+          printf \\n
+          # CLOSING ENCODING SECTION OF LOGFILE
+          if [[ "$make_log_file" == "TRUE" ]] ; then
+            # CLOSE SECTION LOG FILE BEING TRANSCODED - JSON FORMAT
+            echo -e "\n    }" >> "$output_log_file"
           fi
-        else # MOVE to another move directory but do NOT create directory structure
-          mkdir -p "$move_directory" > /dev/null 2>&1
-          short_f="${short_f//\\,/,}"  # remove any \, s
-          short_f="${short_f//\\$/$}"  # remove any \$ s
-          short_f="${short_f//\\\\/\\}"  # remove any \\ s
-          move_to_filename="$move_directory$short_f"
-          if [[ "$quiet" != "TRUE" ]] ; then
-            echo -e "\nMOVING PROCESSED VIDEO FILE: $log_input_f"
+          error_exit "${error_description}"
+          # exit 1
+        elif [[ "$subtitle_file_found" == "FALSE" ]] && [[ "$continue" == "TRUE" ]]; then
+           # SUBS NOT FOUND - SET TO SKIP ADDING - CONTINUE IS TRUE
+          add_subs_skip="TRUE"
+          # ADD COMMA AFTER subtitle_file_found IN LOGFILE
+          if [[ "$make_log_file" == "TRUE" ]] ; then
+            # CLOSE SECTION LOG FILE BEING TRANSCODED - JSON FORMAT
+            printf ",\n" >> "$output_log_file"
           fi
-          input_f="${input_f//\\$/$}"  # remove any \$ s
-          mv "$input_f" "$move_to_filename"
-          if [ "$add_subs" == "TRUE" ] && [ "$subtitle_file_found" == "TRUE" ] ; then
-            move_srt_short_f="${srt_f_l##*/}"
-            move_srt_short_f="${move_srt_short_f//\\,/,}"  # remove any \, s
-            move_srt_short_f="${move_srt_short_f//\\$/$}"  # remove any \$ sv
-            move_srt_short_f="${move_srt_short_f//\\\\/\\}"  # remove any \\ s
-            move_srt_to_filename="$move_directory$move_srt_short_f"
-            if [[ "$quiet" != "TRUE" ]] ; then
-              echo -e "\nMOVING INCLUDED SUBTITLE FILE: $log_srt_f_l"
-            fi
-            srt_f_l="${srt_f_l//\\$/$}"  # remove any \$ s
-            mv "$srt_f_l" "$move_srt_to_filename"
+        else
+          # ADD COMMA AFTER subtitle_file_found IN LOGFILE
+          if [[ "$make_log_file" == "TRUE" ]] ; then
+            # CLOSE SECTION LOG FILE BEING TRANSCODED - JSON FORMAT
+            printf ",\n" >> "$output_log_file"
           fi
         fi
-      fi
-    done
+    		# If NOT Quiet mode - then display what file is being encoded:
+    		if [[ "$quiet" != "TRUE" ]] ; then
+    			echo ""
+          tput setaf 1
+    			tput setab 7
+          the_from_directory=$(echo "${file_name%/*}" | tr -s '/')
+          the_from_directory=$(echo "${the_from_directory//\\,/,}" | tr -s '/')
+          the_from_directory=$(echo "${the_from_directory//\\\\,/\\}" | tr -s '/')
+          the_from_directory=$(echo "${the_from_directory//\/\//\/}" | tr -s '/')  # new for two / s
+          if [[ "$the_from_directory" == "./" ]]; then
+            the_from_directory="."
+          fi
+          echo -e "Encoding file number $current_file_number of $number_of_files_to_encode total files to encode:"
+          echo ""
+          if [[ ! "$the_from_directory" == */ ]] ; then
+            # It does NOT end with a "/"
+            the_from_directory="$the_from_directory/"
+          # else
+          #   It does end with a "/"
+          fi
+          echo "From directory: $the_from_directory"
+          echo ""
+          the_short_f=$(echo "${short_f//\\,/,}" | tr -s '/')
+          the_short_f=$(echo "${the_short_f//\\\\/\\}" | tr -s '/')
+          the_out_f=$(echo "${out_f//\\,/,}" | tr -s '/')
+          the_out_f=$(echo "${the_out_f//\\\\/\\}" | tr -s '/')
+          the_srt_f=$(echo "${srt_f//\\,/,}" | tr -s '/')
+          the_srt_f=$(echo "${the_srt_f//\\\\/\\}" | tr -s '/')
+    			if [[ "$add_subs" == "TRUE" ]] && [[ "$subtitle_file_found" == "TRUE" ]] ; then
+    				echo "ENCODING FILE - \"$the_short_f\" - TO \"$the_out_f\" - WITH SUBTITLE FILE \"$the_srt_f\""
+          elif [[ "$add_subs" == "TRUE" ]] && [[ "$subtitle_file_found" == "FALSE" ]] && [[ "$continue" == "TRUE" ]] ; then
+            echo "ENCODING FILE - \"$the_short_f\" - TO \"$the_out_f\" - WITHOUT MISSING SUBTITLE FILE \"$the_srt_f\""
+    			else
+    				echo "ENCODING FILE - \"$the_short_f\" - TO \"$the_out_f\""
+    			fi
+          echo ""
+          if [ "$output_directory" == "./" ] ; then
+            the_out_directory=$(echo "${file_name%/*}" | tr -s '/')
+            the_out_directory=$(echo "${the_out_directory//\\,/,}" | tr -s '/')
+            the_out_directory=$(echo "${the_out_directory//\\\\/\\}" | tr -s '/')
+            the_out_directory=$(echo "${the_out_directory//\\\\/\\}" | tr -s '/')
+            the_out_directory=$(echo "${the_out_directory//\/\//\/}" | tr -s '/') # new for two / s
+            if [[ "$the_out_directory" == "./" ]]; then
+              the_out_directory="."
+            fi
+            echo "To Output directory: $the_out_directory/"
+          else
+            the_out_directory=$(echo "${out_f_l%/*}" | tr -s '/')
+            the_out_directory=$(echo "${the_out_directory//\\,/,}" | tr -s '/')
+            the_out_directory=$(echo "${the_out_directory//\\\\/\\}" | tr -s '/')
+            the_out_directory=$(echo "${the_out_directory//\\\\/\\}" | tr -s '/')
+            if [[ ! "$the_out_directory" == */ ]] ; then
+              # It does NOT end with a "/"
+              the_out_directory="$the_out_directory/"
+            # else
+            #   It does end with a "/"
+            fi
+            echo "To Output directory: $the_out_directory"
+          fi
+    			tput sgr0
+    			printf \\n
 
+          # IF SET TO SKIP (BECAUSE CONTINUE IS TRUE AND ...) THEN TEMP SET add_subs TO FALSE
+          if [[ "$add_subs_skip" == "TRUE" ]]; then
+            add_subs="FALSE"
+          fi
+
+          # set the preset or Not
+          if [[ "$preset_to_use" != "" ]]; then
+            the_preset="--preset \"$preset_to_use\" "
+            log_the_preset="--preset '$preset_to_use' "
+          else
+            the_preset=""
+          fi
+
+    			if [ "$add_subs" == "TRUE" ] && [ "$up_convert" == "TRUE" ] ; then
+            # IF SAVING LOG FILE
+            if [[ "$make_log_file" == "TRUE" ]] ; then
+              # Save ENCODE COMMAND to log file - JSON FORMAT
+              the_encode_command="$HandBreakCLIProg $log_the_preset--input '${log_input_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file '${log_srt_f_l}' ${HandBrakeCLI_srt_language} </dev/null"
+              log_the_encode_command="${the_encode_command//\\\\\\\\/\\\\}" # 4 \s to 2 \s BACKSLASHES
+              log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
+              log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
+              log_the_encode_command="${the_encode_command//\\/\\\\}" # ESCAPE ANY BACKSLASHES
+              log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
+              log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE $ WITH SINGLE
+              log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
+              echo "      \"encode2m4v_encode_command\" : \"${log_the_encode_command}\"" >> "$output_log_file"
+              printf "    }" >> "$output_log_file"
+            fi
+            if [[ "$details" == "TRUE" ]]; then
+              # TRANSCODE
+              bash -c "$HandBreakCLIProg $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file \"${srt_f_l}\" ${HandBrakeCLI_srt_language} </dev/null"
+            else # NO DETAILS (DEFAULT)
+              echo -e "\nENCODING VIDEO FILE: $log_input_f"
+              bash -c "$HandBreakCLIProg $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file \"${srt_f_l}\" ${HandBrakeCLI_srt_language} </dev/null > /dev/null 2>&1"
+            fi
+
+    			elif [ "$add_subs" == "TRUE" ] && [ "$up_convert" == "FALSE" ] ; then  # NO - UP-CONVERT
+            # IF SAVING LOG FILE
+            if [[ "$make_log_file" == "TRUE" ]] ; then
+              # Save ENCODE COMMAND to log file - JSON FORMAT
+              the_encode_command="$HandBreakCLIProg $log_the_preset--input '${log_input_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file '${log_srt_f_l}' ${HandBrakeCLI_srt_language} </dev/null"
+              log_the_encode_command="${the_encode_command//\\\\\\\\/\\\\}" # 4 \s to 2 \s BACKSLASHES
+              log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
+              log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
+              log_the_encode_command="${the_encode_command//\\/\\\\}" # ESCAPE ANY BACKSLASHES
+              log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
+              log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE \$ WITH SINGLE $
+              log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
+              echo "      \"encode2m4v_encode_command\" : \"${log_the_encode_command}\"" >> "$output_log_file"
+              printf "    }" >> "$output_log_file"
+            fi
+            if [[ "$details" == "TRUE" ]]; then
+              # TRANSCODE
+              bash -c "$HandBreakCLIProg $the_preset--input \"$input_f\" --output \"$out_f_l\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file \"$srt_f_l\" ${HandBrakeCLI_srt_language} </dev/null"
+            else # NO DETAILS
+              echo -e "\nENCODING VIDEO FILE: $log_input_f"
+              bash -c "$HandBreakCLIProg $the_preset--input \"$input_f\" --output \"$out_f_l\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file \"$srt_f_l\" ${HandBrakeCLI_srt_language} </dev/null > /dev/null 2>&1"
+            fi
+    			elif [ "$add_subs" == "FALSE" ] && [ "$up_convert" == "TRUE" ] ; then  # NO - SUBS BUT YES UP-CONVERT
+            # IF SAVING LOG FILE
+            if [[ "$make_log_file" == "TRUE" ]] ; then
+              # Save ENCODE COMMAND to log file - JSON FORMAT
+              the_encode_command="$HandBreakCLIProg $log_the_preset--input '${log_input_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option}  </dev/null"
+              log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
+              log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE \$ WITH SINGLE $
+              log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
+              echo "      \"encode2m4v_encode_command\" : \"${log_the_encode_command}\"" >> "$output_log_file"
+              printf "    }" >> "$output_log_file"
+            fi
+            if [[ "$details" == "TRUE" ]]; then
+              # TRANSCODE
+              bash -c "$HandBreakCLIProg $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option}  </dev/null"
+            else # NO DETAILS
+              echo -e "\nENCODING VIDEO FILE: $log_input_f"
+              bash -c "$HandBreakCLIProg $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option}  </dev/null > /dev/null 2>&1"
+            fi
+
+    			else  # NO SUBS & NO UP-CONVERT
+            # IF SAVING LOG FILE
+            if [[ "$make_log_file" == "TRUE" ]] ; then
+              # Save ENCODE COMMAND to log file - JSON FORMAT
+              the_encode_command="$HandBreakCLIProg $log_the_preset--input '${log_input_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} </dev/null"
+              log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
+              log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE \$ WITH SINGLE $
+              log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
+              echo "      \"encode2m4v_encode_command\" : \"${log_the_encode_command}\"" >> "$output_log_file"
+              printf "    }" >> "$output_log_file"
+            fi
+            if [[ "$details" == "TRUE" ]]; then
+              # TRANSCODE
+              bash -c "$HandBreakCLIProg $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} </dev/null"
+            else  # NO DETAILS
+              echo -e "\nENCODING VIDEO FILE: $log_input_f"
+              bash -c "$HandBreakCLIProg $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} </dev/null > /dev/null 2>&1"
+            fi
+
+    			fi
+    		else # Quiet
+          # IF SET TO SKIP (BECAUSE CONTINUE IS TRUE AND ...) THEN TEMP SET add_subs TO FALSE
+          if [[ "$add_subs_skip" == "TRUE" ]]; then
+            add_subs="FALSE"
+          fi
+
+    			# encoding, but output to dev null... D
+    			if [ "$add_subs" == "TRUE" ] && [ "$up_convert" == "TRUE" ] ; then
+            # IF SAVING LOG FILE
+            if [[ "$make_log_file" == "TRUE" ]] ; then
+              # Save ENCODE COMMAND to log file - JSON FORMAT
+              the_encode_command="$HandBreakCLIProg  --verbose=1 $log_the_preset--input '${log_input_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file '${log_srt_f_l}' ${HandBrakeCLI_srt_language} </dev/null > /dev/null 2>&1"
+              log_the_encode_command="${the_encode_command//\\\\\\\\/\\\\}" # 4 \s to 2 \s BACKSLASHES
+              log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
+              log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
+              log_the_encode_command="${the_encode_command//\\/\\\\}" # ESCAPE ANY BACKSLASHES
+              log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
+              log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE \$ WITH SINGLE $
+              log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
+              echo "      \"encode2m4v_encode_command\" : \"${log_the_encode_command}\"" >> "$output_log_file"
+              printf "    }" >> "$output_log_file"
+            fi
+            # TRANSCODE
+            bash -c "$HandBreakCLIProg  --verbose=1 $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file \"${srt_f_l}\" ${HandBrakeCLI_srt_language} </dev/null > /dev/null 2>&1"
+
+    			elif [ "$add_subs" == "TRUE" ] && [ "$up_convert" == "FALSE" ] ; then  # NO - UP-CONVERT
+            # IF SAVING LOG FILE
+            if [[ "$make_log_file" == "TRUE" ]] ; then
+              # Save ENCODE COMMAND to log file - JSON FORMAT
+              the_encode_command="$HandBreakCLIProg  --verbose=1 $log_the_preset--input '${log_input_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file '${log_srt_f_l}' ${HandBrakeCLI_srt_language} </dev/null > /dev/null 2>&1"
+              log_the_encode_command="${the_encode_command//\\\\\\\\/\\\\}" # 4 \s to 2 \s BACKSLASHES
+              log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
+              log_the_encode_command="${the_encode_command//\\\\/\\}" # MAKE ANY TWO BACKSLASHES INTO JUST ONE
+              log_the_encode_command="${the_encode_command//\\/\\\\}" # ESCAPE ANY BACKSLASHES
+              log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
+              log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE \$ WITH SINGLE $
+              log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
+              echo "      \"encode2m4v_encode_command\" : \"${log_the_encode_command}\"" >> "$output_log_file"
+              printf "    }" >> "$output_log_file"
+            fi
+            # TRANSCODE
+            bash -c "$HandBreakCLIProg  --verbose=1 $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_transcoding_options_for_adding_subtitles} --srt-file \"${srt_f_l}\" ${HandBrakeCLI_srt_language} </dev/null > /dev/null 2>&1"
+
+    			elif [ "$add_subs" == "FALSE" ] && [ "$up_convert" == "TRUE" ] ; then  # NO - SUBS BUT YES UP-CONVERT
+            # IF SAVING LOG FILE
+            if [[ "$make_log_file" == "TRUE" ]] ; then
+              # Save ENCODE COMMAND to log file - JSON FORMAT
+              the_encode_command="$HandBreakCLIProg  --verbose=1 $log_the_preset--input '${log_input_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} </dev/null > /dev/null 2>&1"
+              log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
+              log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE \$ WITH SINGLE $
+              log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
+              echo "      \"encode2m4v_encode_command\" : \"${log_the_encode_command}\"" >> "$output_log_file"
+              printf "    }" >> "$output_log_file"
+            fi
+            # TRANSCODE
+            bash -c "$HandBreakCLIProg  --verbose=1 $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} ${HandBrakeCLI_upconvert_option} </dev/null > /dev/null 2>&1"
+
+    			else  # NO SUBS & NO UP-CONVERT
+            # IF SAVING LOG FILE
+            if [[ "$make_log_file" == "TRUE" ]] ; then
+              # Save ENCODE COMMAND to log file - JSON FORMAT
+              the_encode_command="$HandBreakCLIProg  --verbose=1 $log_the_preset--input '${log_input_f}' --output '${log_out_f_l}' ${HandBrakeCLI_transcoding_options} </dev/null > /dev/null 2>&1"
+              log_the_encode_command="${the_encode_command//\\,/\\\\,}" # ESCAPE ANY BACKSLASHES
+              log_the_encode_command="${the_encode_command//\\$/$}" # REPLACE \$ WITH SINGLE $
+              log_the_encode_command="${the_encode_command//\"/\'}" # REPLACE DOUBLE QUOTES WITH SINGLE
+              echo "      \"encode2m4v_encode_command\" : \"${log_the_encode_command}\"" >> "$output_log_file"
+              printf "    }" >> "$output_log_file"
+            fi
+            #TRANSCODE
+            bash -c "$HandBreakCLIProg  --verbose=1 $the_preset--input \"${input_f}\" --output \"${out_f_l}\" ${HandBrakeCLI_transcoding_options} </dev/null > /dev/null 2>&1"
+
+    			fi
+    		fi
+        # LOG FILE - IF NOT LAST FILE PROCESSED THEN PUT COMMA - ELSE PUT NEWLINE
+        #
+        #  $current_file_number of $number_of_files_to_encode
+        #
+        if [[ "$make_log_file" == "TRUE" ]] ; then
+          if [[ $current_file_number -lt $number_of_files_to_encode ]]; then
+            printf ",\n" >> "$output_log_file"
+          else
+            printf "\n" >> "$output_log_file"
+          fi
+        fi
+
+        if [[ "$add_subs_skip" == "TRUE" ]]; then # RESET TO TEST FOR NEXT SUBTITLE FILE
+          add_subs="TRUE"
+          add_subs_skip="FALSE"
+        fi
+        if [[ "$kill" == "TRUE" ]]; then # DELETE INPUT FILES IF kill IS TRUE
+          input_f="${input_f//\\$/$}"  # remove any \$ s
+          if [[ "$quiet" != "TRUE" ]] ; then
+            echo -e "\nDELETING PROCESSED VIDEO FILE: $input_f"
+          fi
+          rm "${input_f}" > /dev/null 2>&1
+          if [ "$add_subs" == "TRUE" ] && [ "$subtitle_file_found" == "TRUE" ]; then
+            srt_f_l="${srt_f_l//\\$/$}"  # remove any \$ s
+            if [[ "$quiet" != "TRUE" ]] ; then
+              echo -e "\nDELETING INCLUDED SUBTITLE FILE: $srt_f_l"
+            fi
+            rm "${srt_f_l}" > /dev/null 2>&1
+          fi
+        elif [[ "$move_directory_set" == "set" ]]; then # MOVE INPUT FILES IF move_DIRECTORY IS SET
+          if [ "$make_directory_structure" == "TRUE" ] ; then
+            justpathnofile=${input_f%/*}
+            new_path_from_root="${justpathnofile#"$transcode_directory"}"
+            full_move_directory=$(echo "$move_directory$new_path_from_root" | tr -s '/')
+            full_move_directory="${full_move_directory//\\,/,}"  # remove any \, s
+            full_move_directory="${full_move_directory//\\$/$}"  # remove any \$ s
+            full_move_directory="${full_move_directory//\\\\/\\}"  # remove any \\ s
+            mkdir -p "$full_move_directory" > /dev/null 2>&1
+            short_f="${short_f//\\,/,}"  # remove any \, s
+            short_f="${short_f//\\$/$}"  # remove any \$ s
+            short_f="${short_f//\\\\/\\}"  # remove any \\ s
+            move_to_filename="$full_move_directory/$short_f"
+            if [[ "$quiet" != "TRUE" ]] ; then
+              echo -e "\nMOVING PROCESSED VIDEO FILE: $log_input_f"
+            fi
+            input_f="${input_f//\\$/$}"  # remove any \$ s
+            mv "$input_f" "$move_to_filename"
+            if [ "$add_subs" == "TRUE" ] && [ "$subtitle_file_found" == "TRUE" ] ; then
+              move_srt_short_f="${srt_f_l##*/}"
+              move_srt_short_f="${move_srt_short_f//\\,/,}"  # remove any \, s
+              move_srt_short_f="${move_srt_short_f//\\$/$}"  # remove any \$ s
+              move_srt_short_f="${move_srt_short_f//\\\\/\\}"  # remove any \\ s
+              move_srt_to_filename="$full_move_directory/$move_srt_short_f"
+              if [[ "$quiet" != "TRUE" ]] ; then
+                echo -e "\nMOVING INCLUDED SUBTITLE FILE: $log_srt_f_l"
+              fi
+              srt_f_l="${srt_f_l//\\$/$}"  # remove any \$ s
+              mv "$srt_f_l" "$move_srt_to_filename"
+            fi
+          else # MOVE to another move directory but do NOT create directory structure
+            mkdir -p "$move_directory" > /dev/null 2>&1
+            short_f="${short_f//\\,/,}"  # remove any \, s
+            short_f="${short_f//\\$/$}"  # remove any \$ s
+            short_f="${short_f//\\\\/\\}"  # remove any \\ s
+            move_to_filename="$move_directory$short_f"
+            if [[ "$quiet" != "TRUE" ]] ; then
+              echo -e "\nMOVING PROCESSED VIDEO FILE: $log_input_f"
+            fi
+            input_f="${input_f//\\$/$}"  # remove any \$ s
+            mv "$input_f" "$move_to_filename"
+            if [ "$add_subs" == "TRUE" ] && [ "$subtitle_file_found" == "TRUE" ] ; then
+              move_srt_short_f="${srt_f_l##*/}"
+              move_srt_short_f="${move_srt_short_f//\\,/,}"  # remove any \, s
+              move_srt_short_f="${move_srt_short_f//\\$/$}"  # remove any \$ sv
+              move_srt_short_f="${move_srt_short_f//\\\\/\\}"  # remove any \\ s
+              move_srt_to_filename="$move_directory$move_srt_short_f"
+              if [[ "$quiet" != "TRUE" ]] ; then
+                echo -e "\nMOVING INCLUDED SUBTITLE FILE: $log_srt_f_l"
+              fi
+              srt_f_l="${srt_f_l//\\$/$}"  # remove any \$ s
+              mv "$srt_f_l" "$move_srt_to_filename"
+            fi
+          fi
+        fi
+      done
+      # Done Transcoding
+    else # 0 files found to encode
+      echo "Terminating: $number_of_files_to_encode files found to encode."
+    fi
 # Rename Folders BACK - ANY FILES THAT CONTAIN <\,> (backslash comma)
 #
-if [[ "$add_subs" == "TRUE" ]]; then # might as well rename even if $kill -    && [[ "$kill" != "TRUE" ]]
+if [[ "$add_subs" == "TRUE" ]] && [ $number_of_files_to_encode -gt 0 ]; then # might as well rename even if $kill -    && [[ "$kill" != "TRUE" ]]
 	# If NOT Quiet mode - then tell about renaming files back...
 	if [[ $quiet != "TRUE" ]] ; then
     tput setaf 1
@@ -2572,7 +2603,7 @@ if [[ "$add_subs" == "TRUE" ]]; then # might as well rename even if $kill -    &
 	fi
   # Rename folders BACK if commas - WORKS MAC OS & LINUX
   #
-  find "$transcode_directory"/* \( -name '*\\,*' -o -name '*\\\\' \) -type d  -print0 |
+  find "$transcode_directory"* \( -name '*\\,*' -o -name '*\\\\' \) -type d  -print0 |
     while IFS= read -r -d '' dir_name; do
       # SAVE CURRENT DIRECTORY
       orig_dir=$(pwd)
@@ -2593,9 +2624,9 @@ if [[ "$add_subs" == "TRUE" ]]; then # might as well rename even if $kill -    &
     # DONE "RE-RENAMED FOLDERS"
 
   # Rename files BACK
-  find "$transcode_directory"/* -name '*\\,*' -type f \
+  find "$transcode_directory"* -name '*\\,*' -type f \
   -exec bash -c 't="${0//\\,/,}"; mv "$0" "$t" > /dev/null 2>&1' {} \; # -v
-  find "$transcode_directory"/* -name '*\\\\*' -type f \
+  find "$transcode_directory"* -name '*\\\\*' -type f \
   -exec bash -c 't="${0//\\\\/\\}"; mv "$0" "$t" > /dev/null 2>&1' {} \; # -v
   # DONE "RE-RENAMED FILES"
 fi
